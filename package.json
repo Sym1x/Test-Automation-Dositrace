@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js --tags \"@testing\"",
+    "test": "npx cucumber-js --tags \"@testing\"",
     "fulltest": "npx cucumber-js --tags \"not @skip\"",
     "codegen": "npx playwright codegen"
   },
