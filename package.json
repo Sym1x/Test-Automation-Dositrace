@@ -6,7 +6,10 @@
   "scripts": {
     "test": "npx cucumber-js --tags \"@testing\"",
     "fulltest": "npx cucumber-js --tags \"not @skip\"",
-    "codegen": "npx playwright codegen"
+    "codegen": "npx playwright codegen",
+
+    "excelrefactor": "node \"excel logic\"/refactorSheet.js",
+    "excelupdate": "node \"excel logic\"/updateSheet.js"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +21,7 @@
     "playwright": "^1.58.2"
   },
   "dependencies": {
-    "dotenv": "^17.3.1"
+    "dotenv": "^17.3.1",
+    "exceljs": "^4.4.0"
   }
 }
