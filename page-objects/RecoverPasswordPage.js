@@ -9,7 +9,7 @@ class RecoverPasswordPage {
     }
     
     async navigateToPage() {
-        await this.page.goto(env.dositraceURL + "ViewMdpLost", { waitUntil: 'load', timeout: 60000});
+        await this.page.goto(env.baseURL + "ViewMdpLost", { waitUntil: 'load', timeout: 60000});
     }
 
     async submitForm(login, email) {

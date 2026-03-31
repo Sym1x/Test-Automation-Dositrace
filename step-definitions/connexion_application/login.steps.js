@@ -27,7 +27,7 @@ When('the user enters valid credentials', async function () {
     await this.loginPage.submitForm();
 });
 Then('the user should be logged in successfully', async function() {
-    this.expect(this.page.url()).toBe(env.dositraceURL + "DoConnexion");
+    this.expect(this.page.url()).toBe(env.baseURL + "DoConnexion");
 });
 
 
@@ -48,5 +48,5 @@ When('the user clicks password recovery link', async function() {
     await this.loginPage.linkMotPasseOublie.click();
 });
 Then('the password recovery page should load successfully', async function() {
-    await this.expect(this.page.url()).toBe(env.dositraceURL + "ViewMdpLost");
+    await this.expect(this.page.url()).toBe(env.baseURL + "ViewMdpLost");
 });

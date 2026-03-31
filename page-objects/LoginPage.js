@@ -10,7 +10,7 @@ class LoginPage {
     }
     
     async navigateToPage() {
-        await this.page.goto(env.dositraceURL, { waitUntil: 'load', timeout: 60000 });
+        await this.page.goto(env.baseURL, { waitUntil: 'load', timeout: 60000 });
     }
 
     async submitForm(login, password) {
