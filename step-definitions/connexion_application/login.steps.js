@@ -24,7 +24,7 @@ Then("the page should have a password recovery link", async function() {
 
 // Scenario: Successful login
 When('the user enters valid credentials', async function () {
-    await this.loginPage.submitForm(env.dositraceLogin, env.dositracePassword);
+    await this.loginPage.submitForm();
 });
 Then('the user should be logged in successfully', async function() {
     this.expect(this.page.url()).toBe(env.dositraceURL + "DoConnexion");

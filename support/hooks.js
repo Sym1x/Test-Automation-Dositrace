@@ -8,18 +8,24 @@ const output = [];
 
 let browser;
 BeforeAll(async function () {
-  browser = await chromium.launch({ headless: true });
+  browser = await chromium.launch({ headless: false });
 })
 
-Before(async function () {
+Before(async function (scenario) {
   this.browser = browser;
-  if (this.initPage) {
+  // cookie authentication emitted for "noauth" scenarios
+  const tags = scenario.pickle.tags.map(t => t.name);
+  if(tags.includes("@noauth")) {
+    await this.initPage_SansAuth();
+  }
+  else {
     await this.initPage();
   }
 });
 
 After(async function (scenario) {
-  //-----------------
+
+  //----------------- test ouput
   const testIdTag = scenario.pickle.tags.find(t => t.name.startsWith('@TestID_'));
   const testId = testIdTag ? testIdTag.name.replace('@TestID_', '') : null;
   output.push({
@@ -36,10 +42,16 @@ After(async function (scenario) {
 });
 
 AfterAll(async function() {
-  //-----------------
+
+  //----------------- test output save
   const resultsFile = path.join(__dirname, "..", "reports", "test-results.json");
   await fs.promises.writeFile(resultsFile, JSON.stringify(output, null, 2));
   //-----------------
+
+  const authPath = path.join(__dirname, 'auth.json');
+  if (fs.existsSync(authPath)) {
+    fs.unlinkSync(authPath);
+  }
   
   await browser.close();
 })

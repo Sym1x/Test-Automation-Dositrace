@@ -1,3 +1,4 @@
+@noauth
 Feature: Password recovery functionality
     Background:
         Given the user is on the password recovery page
@@ -10,4 +11,4 @@ Feature: Password recovery functionality
     @TestID_9
     Scenario: Unsuccessful password recovery
         When the user enters invalid login or email
-        Then the users get an error message "login ou email incorrect"
+        Then the user get an error message "login ou email incorrect"

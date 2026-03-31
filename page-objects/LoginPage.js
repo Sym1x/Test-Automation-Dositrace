@@ -12,9 +12,15 @@ class LoginPage {
     async navigateToPage() {
         await this.page.goto(env.dositraceURL, { waitUntil: 'load', timeout: 60000 });
     }
+
     async submitForm(login, password) {
-        await this.inputLogin.fill(login);
-        await this.inputPassword.fill(password);
+        if(arguments.length === 0) {
+            await this.inputLogin.fill(env.dositraceLogin);
+            await this.inputPassword.fill(env.dositracePassword);
+        } else {
+            await this.inputLogin.fill(login);
+            await this.inputPassword.fill(password);
+        }
         await this.buttonConnexion.click();
     }
 }

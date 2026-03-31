@@ -19,7 +19,7 @@ Then("the page should contain an email field", async function() {
 When("the user enters invalid login or email", async function() {
     await this.recoverPage.submitForm("failtest", "failtest@fail.fr");
 });
-Then("the users get an error message {string}", async function(msg) {
+Then("the user get an error message {string}", async function(msg) {
     err_notif = await this.page.locator("div[class*='ui-pnotify-container']");
     await this.expect(err_notif).toBeVisible();
     const err_txt = await this.page.locator('.ui-pnotify-text').innerText();
