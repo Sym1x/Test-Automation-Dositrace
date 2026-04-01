@@ -8,7 +8,7 @@ const output = [];
 
 let browser;
 BeforeAll(async function () {
-  browser = await chromium.launch({ headless: false });
+  browser = await chromium.launch({ headless: true });
 })
 
 Before(async function (scenario) {
@@ -25,15 +25,17 @@ Before(async function (scenario) {
 
 After(async function (scenario) {
 
-  //----------------- test ouput
-  const testIdTag = scenario.pickle.tags.find(t => t.name.startsWith('@TestID_'));
-  const testId = testIdTag ? testIdTag.name.replace('@TestID_', '') : null;
-  output.push({
-    id: testId,
-    name: scenario.pickle.name,
-    status: scenario.result.status,
-    error: scenario.result.message || null
-  });
+  //----------------- test ouput(s)
+  const testIdTags = scenario.pickle.tags.filter(t => t.name.startsWith('@TestID_'));
+  const testIds = testIdTags.map(tag => tag.name.replace('@TestID_', ''));
+  for (const id of testIds) {
+    output.push({
+      id,
+      name: scenario.pickle.name,
+      status: scenario.result.status,
+      error: scenario.result.message.split("\n")[0] || null
+    });
+  }
   //-----------------
 
   if(this.closePage) {

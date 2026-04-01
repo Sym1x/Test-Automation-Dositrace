@@ -1,0 +1,27 @@
+Feature: Notification functionality
+    Background:
+        Given the user is on Dositrace site :"/DositraceV2-war/"
+
+    @TestID_14
+    Scenario: Notifications dropdown
+        When the user clicks the bell icon
+        Then a notifications dropdown is toggled
+        And it contains a link to mark all as read
+        And it contains a link to see all notifications
+
+    @TestID_16
+    @TestID_17
+    Scenario: Accessing the notifications interface
+        When the user clicks either link from the dropdown
+        Then the user is redirected to the notifications interface
+        And the user can filter notifications according to different criteria
+
+    @TestID_18
+    Scenario: Marking notifications as read
+        When the user clicks mark all as read
+        Then the user is shown the message "Vous avez 0 notification(s)"
+
+    @TestID_19
+    Scenario: Calendar access
+        When the user clicks Date
+        Then a calendar opens
