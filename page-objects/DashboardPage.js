@@ -15,7 +15,8 @@ class DashboardPage {
 
         //dashboard purpose
         this.blocks = this.page.locator('li[id^="el"]');
-        this.addBlockBtn = this.page.locator('#btn-add');
+        this.addBlockBtn = this.page.locator('#btn-add'); // lists names of blocks that can be added
+        this.unaddedBlocks = this.page.locator('li[id^="linkel"]') // works only after addBlockBtn is clicked
     }
     
     async navigateToPage() {
@@ -25,7 +26,29 @@ class DashboardPage {
             await link.click();
             await this.page.waitForLoadState('networkidle');
         }
-        
+    }
+
+    async addBlockByName(...blockNames) {
+        await this.addBlockBtn.click();
+        const unaddedBlocks_count = await this.unaddedBlocks.count();
+        for(const blockName of blockNames) {
+            for (let i = 0; i < unaddedBlocks_count; i++) {
+                const unaddedBlock = this.unaddedBlocks.nth(i).locator('a');
+                const unaddedBlock_name = await unaddedBlock.innerText();
+                if (unaddedBlock_name.trim() == blockName) {
+                    await unaddedBlock.click();
+                    break;
+                }
+            }
+        }
+    }
+
+    async deleteBlockByName(...blockNames) {
+        // todo
+    }
+
+    async dragBlock() {
+        // todo
     }
 
 }

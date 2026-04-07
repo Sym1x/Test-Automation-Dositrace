@@ -23,3 +23,9 @@ Feature: Blocks can be added to the Dashboard correctly
         When the user adds a block and clicks Valider
         Then the a block is added to the Dashboard
         And the message "Données mises à jour avec succès" is shown
+
+    @TestID_43
+    Scenario: Arranging dashboard blocks
+        When the user holds left click on a block
+        Then the user can drag it to a new position
+        And the user can validate the new position by clicking Valider

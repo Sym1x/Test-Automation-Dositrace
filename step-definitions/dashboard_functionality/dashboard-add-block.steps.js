@@ -12,6 +12,8 @@ Given("the user is on an empty Dashboard", async function () {
 });
 
 
+// refactor
+
 // TestID_39: Listing of blocks to add to Dashboard
 When('the user clicks Ajouter', async function () {
     await this.DashboardPage.addBlockBtn.click();
