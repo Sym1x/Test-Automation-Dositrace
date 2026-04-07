@@ -1,1 +1,0 @@
-Feature: Functional profile interface

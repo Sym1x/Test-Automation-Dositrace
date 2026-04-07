@@ -33,7 +33,7 @@ After(async function (scenario) {
       id,
       name: scenario.pickle.name,
       status: scenario.result.status,
-      error: scenario.result.message.split("\n")[0] || null
+      error: scenario.result?.message?.replace(/\u001b\[[0-9;]*m/g, '').split("\n")[0] ?? null
     });
   }
   //-----------------
