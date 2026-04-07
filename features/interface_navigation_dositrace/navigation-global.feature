@@ -11,7 +11,7 @@ Feature: Functional main navigation interface
     Scenario: Navigation panel toggled view
         When the user clicks toggle button
         Then the navigation panel switches between toggled and untoggled view
-    
+
     @TestID_11
     Scenario: Accessing Dositrace dashboard
         When the user clicks DOSITRACE
@@ -36,4 +36,9 @@ Feature: Functional main navigation interface
         Then a user info menu is toggled
         And it contains a link to profile
         And it contains a link to disconnect
+
+    @TestID_38
+    Scenario: BIOMEDIQA redirection
+        When the user clicks the BIOMEDIQA logo
+        Then the site BIOMEDIQA is opened in a new tab
     

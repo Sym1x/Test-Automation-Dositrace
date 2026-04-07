@@ -7,6 +7,7 @@ class DashboardPage {
         this.navZone = this.page.locator('#accordionSidebar');
         this.toggleNav = this.page.locator('#leftmenu-trigger');
         this.navItems = this.page.locator('.nav-item > .nav-link');
+        this.biomediqa_logo = this.page.locator('.sidebar-brand');
         this.helpButton = this.page.getByRole('banner').getByRole('link', { name: '?' });
         this.headerbarArrow = this.page.locator('#headerbardropdown');
         this.headerbar = this.page.locator('#headerbar');
@@ -15,8 +16,10 @@ class DashboardPage {
 
         //dashboard purpose
         this.blocks = this.page.locator('li[id^="el"]');
+        this.unaddedBlocks = this.page.locator('li[id^="linkel"]'); // works only after addBlockBtn is clicked
         this.addBlockBtn = this.page.locator('#btn-add'); // lists names of blocks that can be added
-        this.unaddedBlocks = this.page.locator('li[id^="linkel"]') // works only after addBlockBtn is clicked
+        this.deleteBlockBton = this.page.locator('#btn-delete');
+
     }
     
     async navigateToPage() {
@@ -32,7 +35,7 @@ class DashboardPage {
         await this.addBlockBtn.click();
         const unaddedBlocks_count = await this.unaddedBlocks.count();
         for(const blockName of blockNames) {
-            for (let i = 0; i < unaddedBlocks_count; i++) {
+            for(let i = 0; i < unaddedBlocks_count; i++) {
                 const unaddedBlock = this.unaddedBlocks.nth(i).locator('a');
                 const unaddedBlock_name = await unaddedBlock.innerText();
                 if (unaddedBlock_name.trim() == blockName) {
@@ -44,7 +47,17 @@ class DashboardPage {
     }
 
     async deleteBlockByName(...blockNames) {
-        // todo
+        await this.deleteBlockBtn.click();
+        const blocks_count = await this.blocks.count();
+        for(let i = 0; i < blocks_count; i++) {
+            for(const blockName of blockNames) {
+                const existingBlock = this.blocks.nth(i);
+                const existingBlock_name = existingBlock.innerText();
+                if(existingBlock_name.trim() == blockName) {
+                    await this.blocks.locator('.deleteCoord').click();
+                }
+            }
+        }
     }
 
     async dragBlock() {

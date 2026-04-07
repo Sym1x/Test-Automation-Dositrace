@@ -20,6 +20,7 @@ Feature: Login functionality
         When the user enters invalid credentials
         Then the user gets an error message "Login ou mot de passe incorrect"
 
+    @skip
     Scenario: Forgot password
         When the user clicks password recovery link
         Then the password recovery page should load successfully

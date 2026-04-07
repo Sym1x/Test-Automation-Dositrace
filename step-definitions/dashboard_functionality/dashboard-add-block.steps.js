@@ -44,9 +44,5 @@ Then('the block is added to the Dashboard', async function () {
     await this.expect(block).toBeVisible();
 })
 Then('the message {string} is shown', async function(expectedMsg) {
-    const succ_notif = this.page.locator("div[class*='ui-pnotify-container']");
-    await this.expect(succ_notif).toBeVisible();
-    const succ_text = await this.page.locator('.ui-pnotify-text').innerText();
-    console.log(succ_text);
-    await this.expect(succ_text).toBe(expectedMsg);
+    await this.verifyPopupMessage(expectedMsg);
 })

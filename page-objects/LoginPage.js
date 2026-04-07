@@ -1,6 +1,9 @@
 const env = require('../environment/env-wrapper');
 
 class LoginPage {
+    static URL_redirection_SuccessLogin = env.baseURL + "DoConnexion";
+    static URL_redirection_ForgotPassword = env.baseURL + "ViewMdpLost";
+    
     constructor(page){
         this.page = page;
         this.inputLogin = page.getByRole('textbox', { name: 'Login' });

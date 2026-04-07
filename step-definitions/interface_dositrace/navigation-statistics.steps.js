@@ -8,6 +8,7 @@ Given("the user is on the Statistics Portal", async function (){
 
 
 // @TestID_580: Presence of different types of statistical charts
+// @TestID_583: Affichage
 Then('{int} distinct charts are visible', async function (expectedCount, dataTable) {
     const expectedTitles = dataTable.raw().flat().map(t => t.trim());
     chart_cards_count = await this.StatisticsPage.chart_cards.count();

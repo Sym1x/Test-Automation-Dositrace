@@ -15,7 +15,6 @@ Feature: Functional navigation interface in Statistics pages
             | Comparaison médiane / NRD IRSN        |
             | Alerte en fonction des types d'alerte |
 
-    @testing
     @TestID_581
     Scenario: Charts are selectable
         Then the user can select any of the statistical charts

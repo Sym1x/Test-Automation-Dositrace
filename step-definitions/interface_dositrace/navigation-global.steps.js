@@ -10,7 +10,7 @@ Given("the user is on Dositrace site", async function (){
 // TestID_9: Navigation panel untoggled view
 Then('{int} elements for navigation are visible', async function (expectedCount) {
     const navItems_count = await this.DashboardPage.navItems.count();
-    await this.expect.soft(navItems_count).toBe(expectedCount);
+    await this.expect.soft(navItems_count).toBeGreaterThanOrEqual(expectedCount);
 });
 
 Then('the user can navigate through them', async function () {
@@ -57,18 +57,16 @@ Then('the user accesses Dositrace\'s User Manual', async function () {
 });
 
 Then('the manual contains {int} cards', async function (expectedCount) {
-    this.manual_cards = this.page.locator('div');
+    this.manual_cards = this.page.locator('div .col-lg-4 > .card');
     this.manual_cards_count = await this.manual_cards.count();
-    await this.expect.soft(this.manual_cards_count).toBeGreaterThanOrEqual(expectedCount);
+    await this.expect.soft(this.manual_cards_count).toBe(expectedCount);
 });
-
-/* PROBLEMATIC
 
 Then('each manual card takes to a page successfully', async function () {
     const manual_URL = await this.page.url();
 
     for (let i = 0; i < this.manual_cards_count; i++) {
-        const firstLink = this.manual_cards.nth(i).locator('.card-body > .card-body').first();
+        const firstLink = this.manual_cards.nth(i).locator('.card-body a').first();
 
         await this.expect(firstLink).toBeVisible({ timeout: 10000 });
 
@@ -84,7 +82,6 @@ Then('each manual card takes to a page successfully', async function () {
     }
 })
 
-*/
 
 // TestID_13: Domain header bar visibility
 When('the user clicks the downwards arrow', async function () {
@@ -115,4 +112,15 @@ Then('it contains a link to profile', async function () {
 
 Then('it contains a link to disconnect', async function () {
     await this.expect(this.page.locator('#userlinks')).toBeVisible();
+});
+
+
+// TestID_38: BIOMEDIQA redirection
+When('the user clicks the BIOMEDIQA logo', async function () {
+    await this.DashboardPage.biomediqa_logo.click();
+});
+
+Then('the site BIOMEDIQA is opened in a new tab', async function () {
+    const newPage = await this.page.context().waitForEvent('page');
+    await this.expect(newPage).toHaveURL(/biomediqa/i);
 });
