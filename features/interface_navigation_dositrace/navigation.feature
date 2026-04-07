@@ -30,7 +30,6 @@ Feature: Functional navigation interface
         Then a header bar for navigating between domains is toggled
         And it contains "SSO-Dositrace-Configuration Center"
     
-    @testing
     @TestID_15
     Scenario: User info dropdown visibility
         When the user clicks on their name or icon

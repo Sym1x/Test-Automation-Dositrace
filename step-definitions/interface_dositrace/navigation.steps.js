@@ -87,7 +87,7 @@ Then('each manual card takes to a page successfully', async function () {
 
 */
 
-// Scenario: Domain header bar visibility
+// TestID_13: Domain header bar visibility
 When('the user clicks the downwards arrow', async function () {
     await this.DashboardPage.headerbarArrow.click();
 });
@@ -101,18 +101,17 @@ Then('it contains "SSO-Dositrace-Configuration Center"', async function () {
 });
 
 
-// Scenario: User info dropdown visibility
+// TestID_15: User info dropdown visibility
 When('the user clicks on their name or icon', async function () {
-    await this.page.click('.dropdown-toggle.username');
+    await this.DashboardPage.profileBar.click();
 });
 
 Then('a user info menu is toggled', async function () {
-    const userMenu = this.page.locator('.dropdown-menu.userinfo');
-    await this.expect(userMenu).toBeVisible();
+    await this.expect(this.DashboardPage.profileMenu).toBeVisible();
 });
 
 Then('it contains a link to profile', async function () {
-    await this.expect(page.locator('ul.dropdown-menu.userinfo.arrow.show > li.username > a')).toBeVisible();
+    await this.expect(this.page.locator('ul.dropdown-menu.userinfo.arrow.show > li.username > a')).toBeVisible();
 });
 
 Then('it contains a link to disconnect', async function () {

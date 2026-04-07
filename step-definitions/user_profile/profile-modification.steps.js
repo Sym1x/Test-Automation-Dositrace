@@ -1,7 +1,10 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
-
-// TestID_31 : Presence of 10 input fields with good display and ergonomics
-Then('there are 10 input fields visible on the profile edit form', async function () {
+//refactor
+/*
+Given('the user is in profile modification page', async function(){});
+*/
+// TestID_31 : Presence of {int} input fields for profile modification
+Then('there {int} input fields for profile modification', async function (expectedCount) {
     const inputFields = this.page.locator('#profile-edit-form input, #profile-edit-form textarea, #profile-edit-form select'); 
     const count = await inputFields.count();
     this.expect(count).toBe(10);

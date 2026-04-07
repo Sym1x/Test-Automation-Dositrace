@@ -1,6 +1,7 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
+const { DashboardPage } = require("../../page-objects/DashboardPage");
 const { expect } = require('@playwright/test');
-
+//refactor
 Given('the user is on Dositrace site :"/DositraceV2-war/"', async function () {
     await this.page.goto('/DositraceV2-war/');
 });

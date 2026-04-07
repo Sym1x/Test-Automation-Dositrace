@@ -1,6 +1,9 @@
 Feature: Functional profile modification interface
+    Background:
+        Given the user is in profile modification page
+
     @TestID_31
-    Scenario: Presence of 10 input fields with good display and ergonomics
+    Scenario: Presence of 10 input fields for profile modification
         Then there are 10 input fields visible on the profile edit form
 
     @TestID_32

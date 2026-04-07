@@ -1,4 +1,5 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
+//refactor
 // TestID_26 : Page shows details on user and expected elements
 Then('the user can consult profile details', async function () {
     await expect(this.page.locator('#profile-details')).toBeVisible(); 
