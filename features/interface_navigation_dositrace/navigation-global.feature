@@ -1,4 +1,4 @@
-Feature: Functional navigation interface
+Feature: Functional main navigation interface
     Background:
         Given the user is on Dositrace site
 

@@ -29,6 +29,7 @@ class PlaywrightWorld extends World {
                 let loginPage = new LoginPage(this.page);
                 await loginPage.navigateToPage();
                 await loginPage.submitForm();
+                await this.page.waitForLoadState('domcontentloaded');
                 await this.context.storageState({ path: authPath });
             }
             else {

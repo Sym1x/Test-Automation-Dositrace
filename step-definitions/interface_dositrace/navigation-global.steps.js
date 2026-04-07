@@ -1,6 +1,5 @@
 const { Given, When, Then  } = require('@cucumber/cucumber');
 const { DashboardPage } = require("../../page-objects/DashboardPage");
-const env = require('../../environment/env-wrapper');
 
 Given("the user is on Dositrace site", async function (){
     this.DashboardPage = new DashboardPage(this.page);
