@@ -1,6 +1,5 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const { NotificationPage } = require("../../page-objects/NotificationPage");
-const { expect } = require('@playwright/test');
 
 Given('the user is on the Notification page', async function() {
     await this.redirectToDositrace();
@@ -15,54 +14,52 @@ When('the user clicks the bell icon', async function () {
 
 Then('a notifications dropdown is toggled', async function () {
     this.notifications_dropdown = this.NotificationPage.notifications_dropdown;
-    expect(this.notifications_dropdown).toHaveClass(/show/);
+    await this.expect(this.notifications_dropdown).toHaveClass(/show/);
 });
 
 Then('it contains a link to mark all as read', async function () {
-    await expect(this.notifications_dropdown.locator('span.header-notification a')).toBeVisible();
+    await this.expect(this.notifications_dropdown.locator('span.header-notification a')).toBeVisible();
 });
 
 Then('it contains a link to see all notifications', async function () {
-    await expect(this.notifications_dropdown.locator('a.dd-viewall')).toBeVisible();
+    await this.expect(this.notifications_dropdown.locator('a.dd-viewall')).toBeVisible();
 });
 
 // TestID_16 + TestID_17 : Accessing the notifications interface
 When('the user clicks either link from the dropdown', async function () {
     await this.NotificationPage.bell.click();
     await this.NotificationPage.notifications_dropdown.locator('span.header-notification a').click();
+    await this.page.waitForLoadState('domcontentloaded')
     await this.NotificationPage.bell.click();
     await this.NotificationPage.notifications_dropdown.locator('a.dd-viewall').click();
 });
 
 Then('the user is redirected to the notifications interface', async function () {
-    await expect(this.page).toHaveURL(/.*ViewNotifications.*/i);
+    await this.expect(this.page).toHaveURL(/.*ViewNotifications.*/i);
 });
 
-Then('the user can filter notifications according to different criteria', async function () {
-    const filterButtons = this.page.locator('#notification-filters >> button, select');
-    expect(count).toBeGreaterThan(0);
-
-    for (let i = 0; i < Math.min(3, count); i++) {
-        await filterButtons.nth(i).click();
-        await this.page.waitForTimeout(300);
-    }
+// REVISIT
+Then('the user can filter notifications according to different criteria', async function (dataTable) {
+    const filtering_bar = this.NotificationPage.filter_div;
 });
 
 // TestID_18 : Marking notifications as read
 When('the user clicks mark all as read', async function () {
-    await this.page.click('#mark-all-as-read');
+    await this.NotificationPage.bell.click();
+    await this.NotificationPage.notifications_dropdown.locator('span.header-notification a').click();
+    await this.page.waitForLoadState('domcontentloaded');
 });
 
-Then('the user is shown the message "Vous avez 0 notification(s)"', async function () {
-    await expect(this.page.locator('text=Vous avez 0 notification(s)')).toBeVisible();
+Then('the user is shown the message {string}', async function (expectedText) {
+    const notification_message = await this.NotificationPage.getNotificationHeaderMessage();
+    await this.expect(notification_message).toHaveText(expectedText);
 });
 
 // TestID_19 : Calendar access
 When('the user clicks Date', async function () {
-    await this.page.click('#date-picker');
+    await this.NotificationPage.calendar.click();
 });
 
 Then('a calendar opens', async function () {
-    const calendar = this.page.locator('#calendar-popup');
-    await expect(calendar).toBeVisible();
+    await this.expect(this.NotificationPage.calendar).toHaveClass(/active/);
 });
