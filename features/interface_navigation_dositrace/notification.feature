@@ -1,6 +1,6 @@
 Feature: Notification functionality
     Background:
-        Given the user is on Dositrace site :"/DositraceV2-war/"
+        Given the user is on the Notification page
 
     @TestID_14
     Scenario: Notifications dropdown
@@ -9,6 +9,7 @@ Feature: Notification functionality
         And it contains a link to mark all as read
         And it contains a link to see all notifications
 
+    @testing
     @TestID_16
     @TestID_17
     Scenario: Accessing the notifications interface

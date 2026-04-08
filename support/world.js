@@ -2,7 +2,7 @@ const { setWorldConstructor, World } = require('@cucumber/cucumber');
 const {setDefaultTimeout} = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
 const assert = require('assert');
-const { verifyPopupMessage } = require("../utils/utils.js")
+const utils = require("../utils/utils.js")
 
 const fs = require('fs');
 const path = require('path');
@@ -14,7 +14,8 @@ class PlaywrightWorld extends World {
         super(options);
         this.assert = assert;
         this.expect = expect;
-        this.verifyPopupMessage = verifyPopupMessage.bind(this);
+        this.verifyPopupMessage = utils.verifyPopupMessage.bind(this);
+        this.redirectToDositrace = utils.redirectToDositrace.bind(this);
     }
 
     async initPage_SansAuth() {

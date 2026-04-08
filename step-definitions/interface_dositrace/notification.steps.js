@@ -1,36 +1,41 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
-const { DashboardPage } = require("../../page-objects/DashboardPage");
+const { NotificationPage } = require("../../page-objects/NotificationPage");
 const { expect } = require('@playwright/test');
-//refactor
-Given('the user is on Dositrace site :"/DositraceV2-war/"', async function () {
-    await this.page.goto('/DositraceV2-war/');
-});
+
+Given('the user is on the Notification page', async function() {
+    await this.redirectToDositrace();
+    this.NotificationPage = new NotificationPage(this.page);
+    await this.NotificationPage.navigateToPage();
+})
 
 // TestID_14 : Notifications dropdown
 When('the user clicks the bell icon', async function () {
-    await this.page.click('#bell-icon');
+    await this.NotificationPage.bell.click();
 });
 
 Then('a notifications dropdown is toggled', async function () {
-    const dropdown = this.page.locator('#notifications-dropdown');
-    await expect(dropdown).toBeVisible();
+    this.notifications_dropdown = this.NotificationPage.notifications_dropdown;
+    expect(this.notifications_dropdown).toHaveClass(/show/);
 });
 
 Then('it contains a link to mark all as read', async function () {
-    await expect(this.page.locator('#notifications-dropdown >> text=Mark all as read|Tout marquer comme lu')).toBeVisible();
+    await expect(this.notifications_dropdown.locator('span.header-notification a')).toBeVisible();
 });
 
 Then('it contains a link to see all notifications', async function () {
-    await expect(this.page.locator('#notifications-dropdown >> text=See all notifications|Voir toutes les notifications')).toBeVisible();
+    await expect(this.notifications_dropdown.locator('a.dd-viewall')).toBeVisible();
 });
 
 // TestID_16 + TestID_17 : Accessing the notifications interface
 When('the user clicks either link from the dropdown', async function () {
-    await this.page.click('#notifications-dropdown >> text=See all|Voir toutes|Mark all as read|Tout marquer');
+    await this.NotificationPage.bell.click();
+    await this.NotificationPage.notifications_dropdown.locator('span.header-notification a').click();
+    await this.NotificationPage.bell.click();
+    await this.NotificationPage.notifications_dropdown.locator('a.dd-viewall').click();
 });
 
 Then('the user is redirected to the notifications interface', async function () {
-    await expect(this.page).toHaveURL(/.*notification|notifications.*/i);
+    await expect(this.page).toHaveURL(/.*ViewNotifications.*/i);
 });
 
 Then('the user can filter notifications according to different criteria', async function () {

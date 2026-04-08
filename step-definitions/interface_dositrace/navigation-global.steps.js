@@ -2,8 +2,7 @@ const { Given, When, Then  } = require('@cucumber/cucumber');
 const { DashboardPage } = require("../../page-objects/DashboardPage");
 
 Given("the user is on Dositrace site", async function (){
-    this.DashboardPage = new DashboardPage(this.page);
-    await this.DashboardPage.navigateToPage();
+    await this.redirectToDositrace();
 });
 
 
@@ -39,7 +38,6 @@ Then('the navigation panel switches between toggled and untoggled view', async f
 // TestID_11: Accessing Dositrace dashboard
 When('the user clicks DOSITRACE', async function () {
     await this.page.getByRole('link', { name: 'DOSITRACE', exact: true }).click();
-    await this.page.waitForLoadState('networkidle');
 });
 
 Then('the user accesses the Dashboard', async function () {
