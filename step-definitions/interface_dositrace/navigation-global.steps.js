@@ -24,13 +24,13 @@ Then('the user can navigate through them', async function () {
 
 // TestID_10: Navigation panel toggled view
 When('the user clicks toggle button', async function () {
-    await this.DashboardPage.toggleNav.click(); // toggled
+    await this.DashboardPage.toggleNav_trigger.click(); // toggled
 });
 
 Then('the navigation panel switches between toggled and untoggled view', async function () {
     await this.expect(this.DashboardPage.navZone).toHaveClass(/toggled/);
     
-    await this.DashboardPage.toggleNav.click(); // untoggled
+    await this.DashboardPage.toggleNav_trigger.click(); // untoggled
     await this.expect(this.DashboardPage.navZone).not.toHaveClass(/toggled/);
 });
 

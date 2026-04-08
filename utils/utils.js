@@ -13,7 +13,7 @@ async function redirectToDositrace() { //because for some reason the link has to
   await this.page.goto(env.dositraceURL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   if(await link.isVisible()){
       await link.click();
-      await this.page.waitForLoadState('networkidle');
+      await this.page.waitForLoadState('networkidle', { timeout: 60000 } );
   }
 }
 

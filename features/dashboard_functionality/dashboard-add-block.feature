@@ -1,7 +1,7 @@
 Feature: Blocks can be added to the Dashboard correctly
     Background:
         Given the user is on an empty Dashboard
-    
+
     @TestID_39
     Scenario: Listing of blocks to add to Dashboard
         When the user clicks Ajouter
@@ -21,11 +21,11 @@ Feature: Blocks can be added to the Dashboard correctly
     @TestID_42
     Scenario: Validate adding blocks
         When the user adds a block and clicks Valider
-        Then the a block is added to the Dashboard
+        Then the block is added to the Dashboard
         And the message "Données mises à jour avec succès" is shown
 
+    @TestID_44
     @TestID_43
     Scenario: Arranging dashboard blocks
-        When the user holds left click on a block
-        Then the user can drag it to a new position
-        And the user can validate the new position by clicking Valider
+        When the user drags an existing block by holding left click to a new position
+        Then the user can validate the new position by clicking Sauvegarder

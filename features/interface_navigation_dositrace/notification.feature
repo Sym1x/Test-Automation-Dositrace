@@ -21,7 +21,7 @@ Feature: Notification functionality
             | date                         |
             | rechercher                   |
             | nombre d'élements à afficher |
-    @testing
+            
     @TestID_18
     Scenario: Marking notifications as read
         When the user clicks mark all as read

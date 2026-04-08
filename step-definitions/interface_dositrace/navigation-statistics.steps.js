@@ -2,6 +2,7 @@ const { Given, When, Then  } = require('@cucumber/cucumber');
 const { StatisticsPage } = require("../../page-objects/StatisticsPage");
 
 Given("the user is on the Statistics Portal", async function (){
+    await this.redirectToDositrace();
     this.StatisticsPage = new StatisticsPage(this.page);
     await this.StatisticsPage.navigateToPortal();
 });
