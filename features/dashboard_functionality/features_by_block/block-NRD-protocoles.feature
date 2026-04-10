@@ -12,5 +12,10 @@ Feature: NRD Protocoles block functionality
         When the user clicks on a protocol inside the NRD/NRI local block
         Then the user should be redirected to the Examens page
         #And the exams should be filtered by the selected protocol
-    #@TestID_80
+    
+    @TestID_80
+    Scenario: Le nombre d’examens affichés après redirection correspond à la valeur NRD du tableau de bord
+        When the user reads the exam count for the first protocol in the NRD block and clicks that protocol
+        Then the user should see exactly that number of exams in the resulting page
+        
     #@TestID_81 not doable

@@ -4,5 +4,8 @@ Feature: Documents block functionality
         And the Dashboard contains the "Documents" block
 
 
-    #@TestID_83
+    @TestID_83
+    Scenario: Functional Documents block
+        Then the Documents block should contain both user guides
+
     #@TestID_84 not doable

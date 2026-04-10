@@ -4,4 +4,7 @@ Feature: Informations block functionality
         And the Dashboard contains the "Informations" block
 
 
-    #@TestID_82
+    @TestID_82
+    Scenario: Functional Informations block
+        Then the Informations block should be functional
+        

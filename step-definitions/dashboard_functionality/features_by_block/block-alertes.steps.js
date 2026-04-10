@@ -8,7 +8,7 @@ Then('the alerts table should be updated with the expected rows for that filter'
     const rowLocator = this.page.locator(
         '#example tbody tr:has-text("09/12/2025 00:00:00"):has-text("18800%"):has-text("Anonyme.")'
     );
-    await expect(rowLocator).toBeVisible();
+    await this.expect(rowLocator).toBeVisible();
 });
 
 

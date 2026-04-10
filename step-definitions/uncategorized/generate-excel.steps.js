@@ -9,18 +9,18 @@ Given("the user is on the excel generation page", async function () {
 // TestID_539: Specifying period
 When("the period field is visible", async function () {
     this.periodField = this.page.locator("#period-input");
-    await expect(this.periodField).toBeVisible();
+    await this.expect(this.periodField).toBeVisible();
 });
 
 Then("the user can choose one of the 4 predefined periods", async function () {
     const buttons = this.page.locator(".period-buttons button");
-    await expect(buttons).toHaveCount(4);
+    await this.expect(buttons).toHaveCount(4);
 });
 
 Then("the user can specify a period manually with the calendar widget", async function () {
     await this.periodField.click();
     const calendar = this.page.locator(".flatpickr-calendar");
-    await expect(calendar).toBeVisible();
+    await this.expect(calendar).toBeVisible();
 });
 
 
@@ -32,12 +32,12 @@ When("the user clicks on the UF field", async function () {
 
 Then("a dropdown list of UFs appears", async function () {
     this.ufList = this.page.locator(".uf-dropdown .dropdown-item");
-    await expect(this.ufList.first()).toBeVisible();
+    await this.expect(this.ufList.first()).toBeVisible();
 });
 
 Then("the user can search or select a UF", async function () {
     const searchInput = this.page.locator(".uf-dropdown input[type='search']");
-    await expect(searchInput).toBeVisible();
+    await this.expect(searchInput).toBeVisible();
 });
 
 
@@ -65,7 +65,7 @@ When("the user clicks on the equipment field", async function () {
 
 Then("a dropdown list of equipments appears", async function () {
     this.equipmentList = this.page.locator(".equipment-dropdown .dropdown-item");
-    await expect(this.equipmentList.first()).toBeVisible();
+    await this.expect(this.equipmentList.first()).toBeVisible();
 });
 
 Then("the user can select an equipment", async function () {
@@ -81,7 +81,7 @@ When("the user clicks on the doctor field", async function () {
 
 Then("a dropdown list of doctors appears", async function () {
     this.doctorList = this.page.locator(".doctor-dropdown .dropdown-item");
-    await expect(this.doctorList.first()).toBeVisible();
+    await this.expect(this.doctorList.first()).toBeVisible();
 });
 
 Then("the user can select a doctor", async function () {
@@ -97,7 +97,7 @@ When("the user clicks on the modality field", async function () {
 
 Then("a dropdown list of modalities appears", async function () {
     this.modalityList = this.page.locator(".modality-dropdown .dropdown-item");
-    await expect(this.modalityList.first()).toBeVisible();
+    await this.expect(this.modalityList.first()).toBeVisible();
 });
 
 Then("the user can select a modality", async function () {
