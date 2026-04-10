@@ -7,7 +7,7 @@ class DashboardPage {
         this.navZone = this.page.locator('#accordionSidebar');
         this.toggleNav_trigger = this.page.locator('#leftmenu-trigger');
         this.navItems = this.page.locator('.nav-item > .nav-link');
-        this.biomediqa_logo = this.page.locator('.sidebar-brand');
+        this.biomediqa_logo = this.page.locator('a.sidebar-brand');
         this.helpButton = this.page.getByRole('banner').getByRole('link', { name: '?' });
         this.headerbarArrow = this.page.locator('#headerbardropdown');
         this.headerbar = this.page.locator('#headerbar');
@@ -22,6 +22,10 @@ class DashboardPage {
         this.validateDeletionBtn = this.page.locator('#btn-confirmation');
         this.validateAddingBtn = this.page.locator('#btn-confirmation-add');
         this.savePositionBtn = this.page.locator('#btn-save');
+
+        this.filterUF = this.page.locator('#filter_1');
+        this.filterUF_field = this.page.locator('#s2id_uf');
+        this.filterPeriod = this.page.locator('#btnPreviousMonth, #btnCurrentMonth, #btnPreviousYear, #btnCurrentYear');
 
     }
     
@@ -57,7 +61,7 @@ class DashboardPage {
         for (let i = 0; i < existingBlockNames.length; i++) {
             const name = existingBlockNames[i];
             if (blockNames.includes(name)) {
-                await this.blocks.nth(i).locator('.deleteCoord').click();
+                await this.blocks.nth(i).locator('.UltimaBlock-overlay > div').click();
             }
         }
         await this.validateDeletionBtn.click();
@@ -75,7 +79,7 @@ class DashboardPage {
             const test = await this.blocks.nth(i).getAttribute('class');
             let block_name;
             if(i == 7) {
-                block_name = await this.blocks.nth(i).locator('.highcharts-title tspan').textContent(); 
+                block_name = await this.blocks.nth(i).locator('.highcharts-title > tspan').textContent(); 
             }
             else {
                 block_name = await this.blocks.nth(i).locator('span.dashbord-card-title').innerText(); //typo in html?

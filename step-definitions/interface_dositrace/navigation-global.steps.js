@@ -3,6 +3,7 @@ const { DashboardPage } = require("../../page-objects/DashboardPage");
 
 Given("the user is on Dositrace site", async function (){
     await this.redirectToDositrace();
+    this.DashboardPage = new DashboardPage(this.page);
 });
 
 
