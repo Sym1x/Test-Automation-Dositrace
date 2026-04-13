@@ -4,10 +4,24 @@ Feature: Nombre dexamens par jour block functionality
         And the Dashboard contains the "Nombre d'examens par jour" block
 
 
-    #@TestID_85
-    #@TestID_86
-    #@TestID_87
-    #@TestID_88
-    #@TestID_89
-    #@TestID_90
+    @TestID_85
+    Scenario: Monthly exam count matches real data
+        When the user checks the number of exams for the year 2025 from the block
+        Then the number of exams should match the one on the Exams page for that year
+    
+    #@TestID_86 nocando (we'll see)
+    
+    @TestID_88
+    @TestID_87
+    Scenario: User navigates to the Examens menu by clicking a chart bar
+        When the user clicks the sixth bar of the chart
+        Then the user should be redirected to the Examens search page
+
+    #@TestID_89 ergonomie
+
+    @TestID_90
+    Scenario: User opens the chart export menu
+        When the user clicks the chart export button
+        Then the user should see 3 chart export options
+
     #@TestID_91 not doable, we'll see

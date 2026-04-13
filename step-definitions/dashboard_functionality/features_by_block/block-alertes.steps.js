@@ -1,4 +1,4 @@
-const { When, Then  } = require('@cucumber/cucumber');
+const { When, Then } = require('@cucumber/cucumber');
 
 // TestID_72: Alerts update after selecting period filter
 When('the user clicks on a period filter', async function () {
