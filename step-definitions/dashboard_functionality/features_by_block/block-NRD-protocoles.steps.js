@@ -28,7 +28,7 @@ When('the user clicks on a protocol inside the NRD/NRI local block', async funct
 Then('the user should be redirected to the Examens page', async function () {
     await this.page.waitForLoadState('networkidle');
     const url = this.page.url();
-    expect(url).toContain('SearchStudy');
+    this.expect(url).toContain('SearchStudy');
 });
 
 
