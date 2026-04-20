@@ -27,7 +27,7 @@ When('the user clicks the sixth bar of the chart', async function () {
 });
 Then('the user should be redirected to the Examens search page', async function () {
     await this.page.waitForLoadState("domcontentloaded");
-    await expect(this.page).toHaveURL(/SearchStudy\?month=&year=2025&uf=/);
+    await this.expect(this.page).toHaveURL(/SearchStudy\?month=&year=2025&uf=/);
 });
 
 
@@ -38,9 +38,9 @@ When('the user clicks the chart export button', async function () {
 });
 Then('the user should see {int} chart export options', async function (expectedCount) {
     const exportMenu = this.page.locator("div[style*='box-shadow'][style*='padding: 5px']");
-    await expect(exportMenu).toBeVisible();
+    await this.expect(exportMenu).toBeVisible();
 
-    await expect(menu).toBeVisible();
+    await this.expect(menu).toBeVisible();
     const items = menu.locator("div");
-    await expect(items).toBeGreaterThanOrEqual(expectedCount);
+    await this.expect(items).toBeGreaterThanOrEqual(expectedCount);
 });

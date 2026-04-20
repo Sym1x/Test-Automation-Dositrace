@@ -14,8 +14,11 @@ class PlaywrightWorld extends World {
         super(options);
         this.assert = assert;
         this.expect = expect;
-        this.verifyPopupMessage = utils.verifyPopupMessage.bind(this);
-        this.redirectToDositrace = utils.redirectToDositrace.bind(this);
+        
+        this.utils = {};
+        for (const [key, fn] of Object.entries(utils)) {
+            this.utils[key] = typeof fn === "function" ? fn.bind(this) : fn;
+        }
     }
 
     async initPage_SansAuth() {

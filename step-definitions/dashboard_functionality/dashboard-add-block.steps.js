@@ -2,7 +2,7 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const { DashboardPage } = require("../../page-objects/DashboardPage");
 
 Given("the user is on an empty Dashboard", async function () {
-    await this.redirectToDositrace();
+    await this.utils.redirectToDositrace();
     this.DashboardPage = new DashboardPage(this.page);
     await this.DashboardPage.navigateToPage();
 
@@ -45,7 +45,7 @@ Then('the block is added to the Dashboard', async function () {
     await this.expect(block).toBeVisible();
 });
 Then('the message {string} is shown', async function(expectedMsg) {
-    await this.verifyPopupMessage(expectedMsg);
+    await this.utils.verifyPopupMessage(expectedMsg);
 });
 
 // TestID_44

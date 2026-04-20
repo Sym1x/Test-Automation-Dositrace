@@ -20,5 +20,5 @@ When("the user enters invalid login or email", async function() {
     await this.recoverPage.submitForm("failtest", "failtest@fail.fr");
 });
 Then("the user get an error message {string}", async function(expectedMsg) {
-    await this.verifyPopupMessage(expectedMsg);
+    await this.utils.verifyPopupMessage(expectedMsg);
 });

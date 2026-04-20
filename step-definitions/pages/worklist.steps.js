@@ -1,21 +1,26 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
-
+const { DataTable } = require('../../page-objects/elements/DataTable');
+const { WorklistPage } = require('../../page-objects/WorklistPage');
 
 Given("the user is on the Worklist page", async function () {
-    await this.redirectToDositrace();
-    await this.page.goto('http://10.0.5.14:8080/DositraceV2-war/Worklist'); // refactor
+    await this.utils.redirectToDositrace();
+
+    this.WorklistPage = new WorklistPage(this.page);
+    await this.WorklistPage.navigateToPage();
+
+    this.exam_table = new DataTable(this.page);
 });
 
 
-// TestID_92: Show exams for today vs for the next 7 days
+// TestID_92: Show worklist exams for today vs for the next 7 days
 Then("the user can choose between displaying the exams set for today or the exams set for the next 7 days", async function () {
     await this.expect(this.page.getByText('Examens du jour')).toBeVisible();
     await this.expect(this.page.getByText('Examens à 7 jours')).toBeVisible();
 });
 
 
-// TestID_93: Add filters
-When('the user clicks "Ajouter des filtres"', async function () {
+// TestID_93: Filters sidebar displays correctly
+When('the user clicks "Ajouter des filtres" for worklist', async function () {
     await this.page.getByText('Ajouter des filtres').click();
 });
 
@@ -112,10 +117,63 @@ Then('the user is redirected to a view of detailed information on the exam', asy
     await this.expect(url).toContain('ViewStudy');
 });
 
-
+// TestID_108: Changing the number of elements to display
 Then('the user is able to change the number of exams displayed in the list', async function () {
     await this.page.getByLabel('Afficher 102550100 éléments').selectOption('25');
     await this.page.getByLabel('Afficher 102550100 éléments').selectOption('50');
     await this.page.getByLabel('Afficher 102550100 éléments').selectOption('100');
     await this.page.getByLabel('Afficher 102550100 éléments').selectOption('10');
+});
+
+
+// TestID_109: Searching globally
+Then('the user can search through exams globally', async function () {
+    //todo
+});
+
+
+// TestID_110: Sorting by column
+Then('the user can sort the listed exams by clicking', async function () {
+    const headers = this.page.locator(
+    'thead th:not(.sorting_disabled):visible'
+    );
+
+    const count = await headers.count();
+    for (let i = 0; i < count; i++) {
+        const th = this.page.locator(
+            'thead th:not(.sorting_disabled):visible'
+        ).nth(i);
+
+        await th.click();
+        await this.expect(th).toHaveAttribute('aria-sort', 'ascending');
+
+        await th.click();
+        await this.expect(th).toHaveAttribute('aria-sort', 'descending');
+    }
+})
+
+// TestingID_113: Viewing patient
+When('the user clicks the name of a patient', async function () {
+    await this.page.locator('#trstudy0 a').filter({ hasText: 'Anonyme PIERRE' }).click();
+});
+Then('the page is redirected to patient page', async function () {
+    const url = this.page.url();
+    await this.expect(url).toContain('ViewPatient');
+});
+// TestingID_114: Viewing exam
+When('the user clicks the number of a patient', async function () {
+    await this.page.getByText('12', { exact: true }).click();
+});
+Then('the page is redirected to exam page', async function () {
+    const url = this.page.url();
+    await this.expect(url).toContain('ViewStudy');
+});
+
+
+// TestingID_115: Viewing exam row details
+When('the user clicks the green tingy', async function () {
+    await this.page.locator('.icon-alert-success').first().click();
+});
+Then('the details of the exam row are shown', async function () {
+    await this.expect(page.getByRole('gridcell', { name: 'Patient : Anonyme PIERRE Date' })).toBeVisible();
 });

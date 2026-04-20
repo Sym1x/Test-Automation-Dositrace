@@ -35,7 +35,7 @@ When('the user enters invalid credentials', async function() {
     await this.loginPage.submitForm("failtest_username", "failtest_password");
 })
 Then('the user gets an error message {string}', async function(expectedMsg) {
-    await this.verifyPopupMessage(expectedMsg);
+    await this.utils.verifyPopupMessage(expectedMsg);
 });
 
 

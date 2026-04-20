@@ -2,7 +2,7 @@ const { Given, When, Then  } = require('@cucumber/cucumber');
 const { DashboardPage } = require("../../page-objects/DashboardPage");
 
 Given("the user is on Dositrace site", async function (){
-    await this.redirectToDositrace();
+    await this.utils.redirectToDositrace();
     this.DashboardPage = new DashboardPage(this.page);
 });
 

@@ -3,12 +3,12 @@ Feature: Worklist page functionality
         Given the user is on the Worklist page
 
     @TestID_92
-    Scenario: Show exams for today vs for the next 7 days
+    Scenario: Show worklist exams for today vs for the next 7 days
         Then the user can choose between displaying the exams set for today or the exams set for the next 7 days
     
     @TestID_93
-    Scenario: Add filters
-        When the user clicks "Ajouter des filtres"
+    Scenario: Filters sidebar displays correctly
+        When the user clicks "Ajouter des filtres" for worklist
         Then the user accesses a filters section containing "UF" and "Equipement"
     
     @TestID_94
@@ -54,14 +54,12 @@ Feature: Worklist page functionality
 
     #@TestID_104 Ergonomie
 
-    @testing
     @TestID_104
     @TestID_105
     Scenario: Filter exams for today vs for the next 7 days
         When the user chooses between displaying the exams set for today or the exams set for the next 7 days
         Then the list of exams is updated accordingly
 
-    @testing
     @TestID_106
     Scenario: Exam sheet redirection
         When the user clicks a listed exam
@@ -70,3 +68,34 @@ Feature: Worklist page functionality
     @TestID_108
     Scenario: Changing the number of elements to display
         Then the user is able to change the number of exams displayed in the list
+
+    #todo
+    @TestID_109
+    Scenario: Searching globally
+        Then the user can search through exams globally
+
+    @TestID_110
+    Scenario: Sorting by column
+        Then the user can sort the listed exams by clicking
+    
+    #todo
+    @TestingID_111
+    Scenario: Urgent exams
+        Then the table must correctly list urgent exams
+
+    @TestingID_113
+    Scenario: Viewing patient
+        When the user clicks the name of a patient
+        Then the page is redirected to patient page
+
+    @TestingID_114
+    Scenario: Viewing exam
+        When the user clicks the number of a patient
+        Then the page is redirected to exam page
+
+    @TestingID_115
+    Scenario: Viewing exam row details
+        When the user clicks the green tingy
+        Then the details of the exam row are shown
+
+    #@TestingID_116 Ergonomie
