@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx cucumber-js --tags \"@testing\"",
-    "fulltest": "npx cucumber-js --tags \"not @skip\"",
+    "fulltest": "npx cucumber-js --tags \"not @skip\" --parallel 4",
     "codegen": "npx playwright codegen",
 
     "excelrefactor": "node \"excel logic\"/refactorSheet.js",

@@ -1,11 +1,11 @@
 Feature: Exam search page functionality
     Background:
-        Given the user is on the ExamSearch page
+        Given the user is on the Exam Search page
     
     @TestID_117
     Scenario: Calendar visibility
         When the user clicks the date field
-        Then a calendar becomes visibile allowing to choose the start date and end date
+        Then a calendar becomes visible allowing to choose the start date and end date
 
     @TestID_118
     Scenario: Date field functionality
@@ -19,7 +19,7 @@ Feature: Exam search page functionality
         Then the date field is updated according to the button clicked
    
     @TestID_123
-    Scenario: The filters sidebar displays correctly
+    Scenario: Filters sidebar displays correctly
         When the user clicks "Ajouter des filtres" for searching exams
         Then the user can select from the filters:
             |   UF                  |
@@ -42,5 +42,3 @@ Feature: Exam search page functionality
         Then a field listing the corresponding filter options becomes visible
 
     #@TestID_127 Ergonomie
-
-    @TestID_128

@@ -1,6 +1,6 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 
-Given('the user is on the ExamSearch page', async function () {
+Given('the user is on the Exam Search page', async function () {
     await this.utils.redirectToDositrace();
     await this.page.goto('http://10.0.5.14:8080/DositraceV2-war/SearchStudy'); // refactor
 });
@@ -11,7 +11,7 @@ When('the user clicks the date field', async function () {
     await this.page.click('#daterangepicker1');
 });
 
-Then('a calendar becomes visibile allowing to choose the start date and end date', async function () {
+Then('a calendar becomes visible allowing to choose the start date and end date', async function () {
     await this.expect(this.page.locator('#daterangepicker1')).toHaveClass(/active/);
 });
 
@@ -40,7 +40,7 @@ Then('the date field is updated according to the button clicked', async function
 });
 
 
-// @TestID_123: The filters sidebar displays correctly
+// TestID_123: The filters sidebar displays correctly
 When('the user clicks "Ajouter des filtres" for searching exams', async function () {
     await this.page.getByText('Ajouter des filtres').click();
 });
