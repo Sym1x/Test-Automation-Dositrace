@@ -3,7 +3,7 @@ Feature: Exam search page functionality
         Given the user is on the Exam Search page
     
     @TestID_117
-    Scenario: Calendar visibility
+    Scenario: Calendar visibility in Exam Search
         When the user clicks the date field
         Then a calendar becomes visible allowing to choose the start date and end date
 

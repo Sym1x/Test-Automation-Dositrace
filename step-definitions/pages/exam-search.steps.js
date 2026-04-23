@@ -6,7 +6,7 @@ Given('the user is on the Exam Search page', async function () {
 });
 
 
-// TestID_117: Calendar visibility
+// TestID_117: Calendar visibility in Exam Search
 When('the user clicks the date field', async function () {
     await this.page.click('#daterangepicker1');
 });

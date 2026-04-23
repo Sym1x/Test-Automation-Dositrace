@@ -75,8 +75,8 @@ Feature: Worklist page functionality
         Then the user can search through exams globally
 
     @TestID_110
-    Scenario: Sorting by column
-        Then the user can sort the listed exams by clicking
+    Scenario: Sorting worklist by column
+        Then the user can sort the listed exams by clicking a column name
     
     #todo
     @TestingID_111
@@ -85,8 +85,8 @@ Feature: Worklist page functionality
 
     @TestingID_113
     Scenario: Viewing patient
-        When the user clicks the name of a patient
-        Then the page is redirected to patient page
+        When the user clicks the name of a patient in the worklist
+        Then the user is redirected to view the sheet of the patient
 
     @TestingID_114
     Scenario: Viewing exam

@@ -30,4 +30,4 @@ Feature: Notification functionality
     @TestID_19
     Scenario: Calendar access
         When the user clicks Date
-        Then a calendar opens
+        Then a calendar is displayed

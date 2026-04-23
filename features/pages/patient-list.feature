@@ -29,6 +29,7 @@ Feature: Patient list page functionality
         Then the patient list is updated in accordance with the chosen Sexe
 
     #@TestingID_222 Ergonomie
+    
     @TestingID_223
     Scenario: Date de naissance input calendar displays correctly
         When the user clicks the Date de naissance field to filter
@@ -49,3 +50,25 @@ Feature: Patient list page functionality
     @TestingID_228
     Scenario: Global search in patient list
         Then the user can search globally along the columns of the patient table
+
+    @TestingID_229
+    Scenario: Sorting patient list by column
+        Then the user can sort the patient list by clicking a column name
+
+    @TestingID_230
+    Scenario: Navigating the patient list
+        Then the user can use the arrows to navigate the patient list
+    
+    #@TestingID_231 Ergonomie
+    
+    @TestingID_232
+    Scenario: Choosing number of patients to list in one page
+        Then the user can choose to list 10 or 25 or 50 or 100 patients 
+
+    @testing
+    @TestingID_233
+    Scenario: Viewing patients
+        When the user clicks the name of a patient in the patient list page
+        Then the user is redirected to view the sheet of the patient
+    
+    #@TestingID_234 Ergonomie

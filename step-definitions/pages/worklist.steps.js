@@ -132,8 +132,8 @@ Then('the user can search through exams globally', async function () {
 });
 
 
-// TestID_110: Sorting by column
-Then('the user can sort the listed exams by clicking', async function () {
+// TestID_110: Sorting worklist by column
+Then('the user can sort the listed exams by clicking a column name', async function () {
     const headers = this.page.locator(
     'thead th:not(.sorting_disabled):visible'
     );
@@ -153,13 +153,15 @@ Then('the user can sort the listed exams by clicking', async function () {
 })
 
 // TestingID_113: Viewing patient
-When('the user clicks the name of a patient', async function () {
+When('the user clicks the name of a patient in the worklist', async function () {
     await this.page.locator('#trstudy0 a').filter({ hasText: 'Anonyme PIERRE' }).click();
 });
-Then('the page is redirected to patient page', async function () {
+/*Then('the page is redirected to patient page', async function () {
     const url = this.page.url();
     await this.expect(url).toContain('ViewPatient');
-});
+});*/
+
+
 // TestingID_114: Viewing exam
 When('the user clicks the number of a patient', async function () {
     await this.page.getByText('12', { exact: true }).click();
