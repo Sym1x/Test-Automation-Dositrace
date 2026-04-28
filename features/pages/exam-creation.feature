@@ -29,4 +29,4 @@ Feature: Exam creation page functionality
         Then an input bar allowing to choose Exam Creation time becomes visibile
 
     @TestID_299
-    Scenario: 
+    Scenario: Accession number #revisit

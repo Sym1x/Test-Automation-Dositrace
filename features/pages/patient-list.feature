@@ -7,68 +7,68 @@ Feature: Patient list page functionality
         Then "Etat" search box is visible
         Then "Actifs" and "Supprimés"  options are available
 
-    @TestingID_215
+    @TestID_215
     Scenario: Etat field functions correctly
         Then the user can filter by Etat correctly
 
-    #TestingID_216 Ergonomie
+    #TestID_216 Ergonomie
 
-    @TestingID_217
+    @TestID_217
     Scenario: Filters sidebar displays correctly
         When the user clicks "Ajouter des filtres" for patient list
         Then the user accesses a filters section containing "Date de naissance" and "Sexe"
 
-    @TestingID_220
+    @TestID_220
     Scenario: Dropdown for the Sexe field displays correctly
         When the user clicks the Sexe field to filter
         Then a search field along the options (Hommes, femmes, Non définis et Tous) become visible 
 
-    @TestingID_221
+    @TestID_221
     Scenario: The Sexe field filters correctly
         When the user filters by Sexe
         Then the patient list is updated in accordance with the chosen Sexe
 
-    #@TestingID_222 Ergonomie
+    #@TestID_222 Ergonomie
     
-    @TestingID_223
+    @TestID_223
     Scenario: Date de naissance input calendar displays correctly
         When the user clicks the Date de naissance field to filter
         Then a calender becomes visible to choose date of birth
 
-    #@TestingID_224 Ergonomie
+    #@TestID_224 Ergonomie
 
-    @TestingID_225
+    @TestID_225
     Scenario: The Date de naissance field filters correctly
         When the user filters by Date de naissance
         Then the patient list is updated in accordance with the chosen Date
 
-    @TestingID_226
+    @TestID_226
     Scenario: "Réinitialiser" button functions correctly
         When the user has filters enabled and clicks the Réinitialiser button
         Then the filters are reset
 
-    @TestingID_228
+    @TestID_228
     Scenario: Global search in patient list
         Then the user can search globally along the columns of the patient table
 
-    @TestingID_229
+    @TestID_229
     Scenario: Sorting patient list by column
         Then the user can sort the patient list by clicking a column name
 
-    @TestingID_230
+    @TestID_230
     Scenario: Navigating the patient list
         Then the user can use the arrows to navigate the patient list
     
-    #@TestingID_231 Ergonomie
+    #@TestID_231 Ergonomie
     
-    @TestingID_232
+    @TestID_232
     Scenario: Choosing number of patients to list in one page
         Then the user can choose to list 10 or 25 or 50 or 100 patients 
 
-    @testing
-    @TestingID_233
+    @TestID_233
     Scenario: Viewing patients
         When the user clicks the name of a patient in the patient list page
         Then the user is redirected to view the sheet of the patient
     
-    #@TestingID_234 Ergonomie
+    #@TestID_234 Ergonomie
+

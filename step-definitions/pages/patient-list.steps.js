@@ -5,6 +5,7 @@ Given('the user is on the Patient List page', async function () {
     await this.page.goto('http://10.0.5.14:8080/DositraceV2-war/ListPatient');
 });
 
+
 // TestID_214: Etat field displays correctly
 Then('{string} search box is visible', async function () {
     await this.expect(this.page.getByText('Etat')).toBeVisible();
@@ -24,7 +25,7 @@ Then('the user can filter by Etat correctly', async function () {
 });
 
 
-// TestingID_217: Filters sidebar displays correctly
+// TestID_217: Filters sidebar displays correctly
 When('the user clicks "Ajouter des filtres" for patient list', async function () {
     await this.page.getByText('Ajouter des filtres').click();
 });
@@ -34,7 +35,7 @@ Then('the user accesses a filters section containing "Date de naissance" and "Se
 });
 
 
-// TestingID_220: Dropdown field displays correctly
+// TestID_220: Dropdown field displays correctly
 When('the user clicks the Sexe field to filter', async function () {
     await this.page.getByText('Ajouter des filtres').click();
     await this.page.locator('#s2id_gender > a').click();
@@ -48,7 +49,7 @@ Then('a search field along the options \\(Hommes, femmes, Non définis et Tous) 
 });
 
 
-// TestingID_221: The Sexe field filters correctly
+// TestID_221: The Sexe field filters correctly
 When('the user filters by Sexe', async function () {
     await this.page.getByText('Ajouter des filtres').click();
     await this.page.locator('#s2id_gender > a').click(); 
@@ -60,7 +61,7 @@ Then('the patient list is updated accordingly', async function () {
 });
 
 
-// TestingID_223: Date de naissance input calendar displays correctly
+// TestID_223: Date de naissance input calendar displays correctly
 When('the user clicks the Date de naissance field to filter', async function () {
     await this.page.getByText('Ajouter des filtres').click();
     await this.page.getByRole('textbox', { name: 'Date de naissance' }).click();
@@ -71,7 +72,7 @@ Then('a calender becomes visible to choose date of birth', async function () {
 });
 
 
-// TestingID_225: The Date de naissance field filters correctly
+// TestID_225: The Date de naissance field filters correctly
 When('the user filters by Date de naissance', async function () {
     await this.page.getByText('Ajouter des filtres').click();
     await this.page.getByRole('textbox', { name: 'Date de naissance' }).fill('13/02/1996');
@@ -83,7 +84,7 @@ Then('the patient list is updated in accordance with the chosen Date', async fun
 });
 
 
-// TestingID_226: "Réinitialiser" button functions correctly
+// TestID_226: "Réinitialiser" button functions correctly
 When('the user has filters enabled and clicks the Réinitialiser button', async function () {
     await this.page.getByRole('link', { name: 'Actifs' }).click();
     await this.page.locator('#select2-drop').getByText('Supprimés').click();
@@ -99,7 +100,7 @@ Then('the filters are reset', async function () {
 });
 
 
-// TestingID_228: Global search in patient list
+// TestID_228: Global search in patient list
 Then('the user can search globally along the columns of the patient table', async function () {
     await this.page.getByPlaceholder('Recherche globale').fill('anonyme denise cecile j');
     await this.page.getByPlaceholder('Recherche globale').press('Enter');
@@ -148,24 +149,24 @@ console.log(outer);
 });
 
 
-// TestingID_230: Navigating the patient list
+// TestID_230: Navigating the patient list
 Then('the user can use the arrows to navigate the patient list', async function () {
     await this.page.locator('#patient_next').click();
     await this.expect(this.page.locator('#patient_info')).toContainText('Affichage de l\'élément 11 à 20 sur 20,300 élément(s)');
 
-    await page.locator('#patient_last').click();
-    await expect(page.locator('#patient_info')).toContainText('Affichage de l\'élément 20,291 à 20,300 sur 20,300 élément(s)');
+    await this.page.locator('#patient_last').click();
+    await this.expect(this.page.locator('#patient_info')).toContainText('Affichage de l\'élément 20,291 à 20,300 sur 20,300 élément(s)');
 });
 
 
 
-// TestingID_231: Choosing number of patients to list in one page
+// TestID_231: Choosing number of patients to list in one page
 Then('the user can choose to list 10 or 25 or 50 or 100 patients', async function () {
     await this.expect(this.page.locator('#patient_length')).toContainText('Afficher 102550100 éléments');
 });
 
 
-// TestingID_233: Viewing patients
+// TestID_233: Viewing patients
 When('the user clicks the name of a patient in the patient list page', async function () {
     await this.page.getByRole('gridcell', { name: 'fetus14' }).click();
 });

@@ -2,6 +2,7 @@ Feature: Worklist page functionality
     Background:
         Given the user is on the Worklist page
 
+    @testing
     @TestID_92
     Scenario: Show worklist exams for today vs for the next 7 days
         Then the user can choose between displaying the exams set for today or the exams set for the next 7 days
@@ -16,7 +17,7 @@ Feature: Worklist page functionality
         When the user clicks the UF filter
         Then a field listing the corresponding UF items becomes visible
     
-    @TestingID_101
+    @TestID_101
     Scenario: Clicking the Equipement filter
         When the user clicks the Equipement filter
         Then a field listing the corresponding Equipement items becomes visible
@@ -40,7 +41,7 @@ Feature: Worklist page functionality
         Then the list is updated with the correct exams
 
     @skip
-    @TestingID_99
+    @TestID_99
     Scenario: Removing the UF field
         When the user has selected a UF filter
         Then the user can remove the selected UF field
@@ -79,23 +80,23 @@ Feature: Worklist page functionality
         Then the user can sort the listed exams by clicking a column name
     
     #todo
-    @TestingID_111
+    @TestID_111
     Scenario: Urgent exams
         Then the table must correctly list urgent exams
 
-    @TestingID_113
+    @TestID_113
     Scenario: Viewing patient
         When the user clicks the name of a patient in the worklist
         Then the user is redirected to view the sheet of the patient
 
-    @TestingID_114
+    @TestID_114
     Scenario: Viewing exam
         When the user clicks the number of a patient
         Then the page is redirected to exam page
 
-    @TestingID_115
+    @TestID_115
     Scenario: Viewing exam row details
         When the user clicks the green tingy
         Then the details of the exam row are shown
 
-    #@TestingID_116 Ergonomie
+    #@TestID_116 Ergonomie

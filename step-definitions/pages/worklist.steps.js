@@ -39,7 +39,7 @@ Then('a field listing the corresponding UF items becomes visible', async functio
     await this.expect(this.page.locator('#select2-drop').getByRole('textbox')).toBeVisible();
 });
 
-// TestingID_101: Clicking the Equipement filter
+// TestID_101: Clicking the Equipement filter
 When('the user clicks the Equipement filter', async function () {
     await this.page.getByText('Ajouter des filtres').click();
     await this.page.locator('#s2id_equi').getByRole('list').click();
@@ -152,7 +152,7 @@ Then('the user can sort the listed exams by clicking a column name', async funct
     }
 })
 
-// TestingID_113: Viewing patient
+// TestID_113: Viewing patient
 When('the user clicks the name of a patient in the worklist', async function () {
     await this.page.locator('#trstudy0 a').filter({ hasText: 'Anonyme PIERRE' }).click();
 });
@@ -162,7 +162,7 @@ When('the user clicks the name of a patient in the worklist', async function () 
 });*/
 
 
-// TestingID_114: Viewing exam
+// TestID_114: Viewing exam
 When('the user clicks the number of a patient', async function () {
     await this.page.getByText('12', { exact: true }).click();
 });
@@ -172,7 +172,7 @@ Then('the page is redirected to exam page', async function () {
 });
 
 
-// TestingID_115: Viewing exam row details
+// TestID_115: Viewing exam row details
 When('the user clicks the green tingy', async function () {
     await this.page.locator('.icon-alert-success').first().click();
 });

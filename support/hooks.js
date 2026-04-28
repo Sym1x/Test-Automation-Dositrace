@@ -8,14 +8,14 @@ const output = [];
 
 let browser;
 BeforeAll(async function () {
-  browser = await chromium.launch({ headless: false });
+  browser = await chromium.launch({ headless: true });
 })
 
 Before(async function (scenario) {
   this.browser = browser;
   // cookie authentication emitted for "noauth" scenarios
-  const tags = scenario.pickle.tags.map(t => t.name);
-  if(tags.includes("@noauth")) {
+  this.tags = scenario.pickle.tags.map(t => t.name);
+  if(this.tags.includes("@noauth")) {
     await this.initPage_SansAuth();
   }
   else {
