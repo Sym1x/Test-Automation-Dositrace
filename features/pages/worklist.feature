@@ -2,29 +2,28 @@ Feature: Worklist page functionality
     Background:
         Given the user is on the Worklist page
 
-    @testing
     @TestID_92
     Scenario: Show worklist exams for today vs for the next 7 days
         Then the user can choose between displaying the exams set for today or the exams set for the next 7 days
-    
+
     @TestID_93
     Scenario: Filters sidebar displays correctly
         When the user clicks "Ajouter des filtres" for worklist
         Then the user accesses a filters section containing "UF" and "Equipement"
-    
+      
     @TestID_94
-    Scenario: Clicking UF filter
-        When the user clicks the UF filter
+    Scenario: Clicking the UF filter
+        When the user clicks the UF filter in worklist filters
         Then a field listing the corresponding UF items becomes visible
     
     @TestID_101
     Scenario: Clicking the Equipement filter
-        When the user clicks the Equipement filter
+        When the user clicks the Equipement filter in worklist filters
         Then a field listing the corresponding Equipement items becomes visible
     
     @TestID_95
     @TestID_97
-    Scenario: Searching filters
+    Scenario: Searching up filter items
         When the user is selecting a UF or Equipement filter
         Then the user can search by inputting its name
     
@@ -58,7 +57,7 @@ Feature: Worklist page functionality
     @TestID_104
     @TestID_105
     Scenario: Filter exams for today vs for the next 7 days
-        When the user chooses between displaying the exams set for today or the exams set for the next 7 days
+        When the user chooses to display the exams set for the next 7 days
         Then the list of exams is updated accordingly
 
     @TestID_106
@@ -68,13 +67,12 @@ Feature: Worklist page functionality
 
     @TestID_108
     Scenario: Changing the number of elements to display
-        Then the user is able to change the number of exams displayed in the list
+        Then the user is able to change the number of exams displayed in the worklist
 
-    #todo
+    
     @TestID_109
     Scenario: Searching globally
         Then the user can search through exams globally
-
     @TestID_110
     Scenario: Sorting worklist by column
         Then the user can sort the listed exams by clicking a column name
@@ -96,7 +94,7 @@ Feature: Worklist page functionality
 
     @TestID_115
     Scenario: Viewing exam row details
-        When the user clicks the green tingy
+        When the user clicks the green status icon
         Then the details of the exam row are shown
 
     #@TestID_116 Ergonomie

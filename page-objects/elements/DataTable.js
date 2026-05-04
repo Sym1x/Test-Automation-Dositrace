@@ -7,7 +7,7 @@ class DataTable {
         this.dataTableWrapper = this.page.locator('.dataTables_wrapper').first();
         
         this.dataTable_length = this.dataTableWrapper.locator('.dataTables_length');
-        this.search_bar = this.dataTableWrapper.locator('.dataTables_filter > .form-control');
+        this.search_bar = this.dataTableWrapper.locator('.dataTables_filter .form-control');
         
         this.table = this.dataTableWrapper.locator('table.dataTable');
         this.thead = this.table.locator('thead > tr');
@@ -18,7 +18,7 @@ class DataTable {
     };
 
     async changeTableLength(new_length) {
-        const lengthSelect = this.dataTable_Length.locator('select[name="patient_length"]');
+        const lengthSelect = this.dataTable_length.locator('select');
         await lengthSelect.selectOption(String(new_length));
     };
 
@@ -49,6 +49,30 @@ class DataTable {
         }
         return result;
     };
+
+    async getCell(columnName, rowNumber) {
+        const headers = this.thead.locator('th');
+
+        const count = await headers.count();
+
+        let columnIndex = -1;
+
+        for (let i = 0; i < count; i++) {
+            const text = await headers.nth(i).innerText();
+            if (text.trim() === columnName) {
+                columnIndex = i;
+                break;
+            }
+        }
+
+        if (columnIndex === -1) {
+            throw new Error(`Column "${columnName}" not found`);
+        }
+
+        const row = this.tbody.locator('tr').nth(rowNumber);
+
+        return row.locator('td').nth(columnIndex);
+    }
 
     async getPaginationInfo() {
         return await this.dataTable_pagination_info.innerText();

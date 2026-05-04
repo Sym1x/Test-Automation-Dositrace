@@ -52,7 +52,7 @@ Then("all UFs registered in Configuration Center are present", async function ()
     const ufOptions = await this.page.locator(".uf-dropdown .dropdown-item").allInnerTexts();
 
     for (const uf of ufsFromConfig) {
-        expect(ufOptions).toContain(uf);
+        this.expect(ufOptions).toContain(uf);
     }
 });
 
@@ -102,4 +102,19 @@ Then("a dropdown list of modalities appears", async function () {
 
 Then("the user can select a modality", async function () {
     await this.modalityList.first().click();
+});
+
+
+
+
+
+
+
+Then("the datatable object works on all pages", async function () {
+    await this.utils.redirectToDositrace();
+    this.exam_table = new DataTable(this.page);
+
+    await this.page.goto('http://10.0.5.14:8080/DositraceV2-war/Worklist');
+    await this.page.getByText('Examens à 7 jours').click();
+    console.log(await this.exam_table.getColumnNames());
 });

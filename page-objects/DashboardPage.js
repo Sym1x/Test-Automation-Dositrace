@@ -3,18 +3,7 @@ const env = require('../environment/env-wrapper');
 class DashboardPage {
     constructor(page){
         this.page = page;
-        //navigation purpose
-        this.navZone = this.page.locator('#accordionSidebar');
-        this.toggleNav_trigger = this.page.locator('#leftmenu-trigger');
-        this.navItems = this.page.locator('.nav-item > .nav-link');
-        this.biomediqa_logo = this.page.locator('a.sidebar-brand');
-        this.helpButton = this.page.getByRole('banner').getByRole('link', { name: '?' });
-        this.headerbarArrow = this.page.locator('#headerbardropdown');
-        this.headerbar = this.page.locator('#headerbar');
-        this.profileBar = this.page.locator('.dropdown-toggle.username');
-        this.profileMenu = this.page.locator('.dropdown-menu.userinfo');
 
-        //dashboard purpose
         this.blocks = this.page.locator('li[id^="el"]');
         this.unaddedBlocks = this.page.locator('li[id^="linkel"]'); // works only after addBlockBtn is clicked
         this.addBlockBtn = this.page.locator('#btn-add'); // lists names of blocks that can be added
@@ -49,7 +38,7 @@ class DashboardPage {
             }
         }
         await this.validateAddingBtn.click();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForLoadState('load');
     }
 
     async deleteBlockByName(...blockNames) {
@@ -65,7 +54,7 @@ class DashboardPage {
             }
         }
         await this.validateDeletionBtn.click();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForLoadState('load');
     }
 
     async getExistingBlockNames() {

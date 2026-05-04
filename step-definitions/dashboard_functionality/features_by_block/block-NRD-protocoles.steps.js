@@ -26,7 +26,7 @@ When('the user clicks on a protocol inside the NRD/NRI local block', async funct
     await firstProtocol.click();
 });
 Then('the user should be redirected to the Examens page', async function () {
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState('load');
     const url = this.page.url();
     this.expect(url).toContain('SearchStudy');
 });
@@ -41,7 +41,7 @@ When('the user reads the exam count for the first protocol in the NRD block and 
 
     const link = this.page.locator('#protprinc table tr').first().locator('td a');
     await link.click();
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState('load');
 });
 
 Then('the user should see exactly that number of exams in the resulting page', async function () {

@@ -8,7 +8,7 @@ class StatisticsPage {
     }
     
     async navigateToPortal() {
-        await this.page.goto(env.dositraceURL + "ChartDashboard", { waitUntil: 'networkidle', timeout: 60000 });
+        await this.page.goto(env.dositraceURL + "ChartDashboard", { waitUntil: 'load', timeout: 60000 });
     }
 
     async navigateToMultiChart() {

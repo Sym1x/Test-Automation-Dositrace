@@ -1,38 +1,38 @@
 const { Given, When, Then  } = require('@cucumber/cucumber');
-const { DashboardPage } = require("../../page-objects/DashboardPage");
+const { Navbar } = require("../../page-objects/elements/Navbar");
 
 Given("the user is on Dositrace site", async function (){
     await this.utils.redirectToDositrace();
-    this.DashboardPage = new DashboardPage(this.page);
+    this.Navbar = new Navbar(this.page);
 });
 
 
 // TestID_9: Navigation panel untoggled view
 Then('{int} elements for navigation are visible', async function (expectedCount) {
-    const navItems_count = await this.DashboardPage.navItems.count();
+    const navItems_count = await this.Navbar.navItems.count();
     await this.expect.soft(navItems_count).toBeGreaterThanOrEqual(expectedCount);
 });
 
 Then('the user can navigate through them', async function () {
-    const navItems = this.DashboardPage.navItems;
+    const navItems = this.Navbar.navItems;
     const navItems_count = await navItems.count();
     for (let i = 0; i < navItems_count; i++) {
         await navItems.nth(i).click();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForLoadState('load');
     }
 });
 
 
 // TestID_10: Navigation panel toggled view
 When('the user clicks toggle button', async function () {
-    await this.DashboardPage.toggleNav_trigger.click(); // toggled
+    await this.Navbar.toggleNav_trigger.click(); // toggled
 });
 
 Then('the navigation panel switches between toggled and untoggled view', async function () {
-    await this.expect(this.DashboardPage.navZone).toHaveClass(/toggled/);
+    await this.expect(this.Navbar.navZone).not.toHaveClass(/toggled/);
     
-    await this.DashboardPage.toggleNav_trigger.click(); // untoggled
-    await this.expect(this.DashboardPage.navZone).not.toHaveClass(/toggled/);
+    await this.Navbar.toggleNav_trigger.click(); // untoggled
+    await this.expect(this.Navbar.navZone).toHaveClass(/toggled/);
 });
 
 
@@ -48,7 +48,7 @@ Then('the user accesses the Dashboard', async function () {
 
 // TestID_12: Accessing user manual
 When('the user clicks ?', async function () {
-    await this.DashboardPage.helpButton.click();
+    await this.Navbar.helpButton.click();
 });
 
 Then('the user accesses Dositrace\'s User Manual', async function () {
@@ -70,25 +70,25 @@ Then('each manual card takes to a page successfully', async function () {
         await this.expect(firstLink).toBeVisible({ timeout: 10000 });
 
         await Promise.all([
-            this.page.waitForLoadState('networkidle'),
+            this.page.waitForLoadState('load'),
             firstLink.click(),
         ]);
 
         await this.expect(this.page).not.toHaveURL(manual_URL);
 
         await this.page.goBack();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForLoadState('load');
     }
 })
 
 
 // TestID_13: Domain header bar visibility
 When('the user clicks the downwards arrow', async function () {
-    await this.DashboardPage.headerbarArrow.click();
+    await this.Navbar.headerbarArrow.click();
 });
 
 Then('a header bar for navigating between domains is toggled', async function () {
-    await this.expect(this.DashboardPage.headerbar).toBeVisible();
+    await this.expect(this.Navbar.headerbar).toBeVisible();
 });
 
 Then('it contains "SSO-Dositrace-Configuration Center"', async function () {
@@ -98,11 +98,11 @@ Then('it contains "SSO-Dositrace-Configuration Center"', async function () {
 
 // TestID_15: User info dropdown visibility
 When('the user clicks on their name or icon', async function () {
-    await this.DashboardPage.profileBar.click();
+    await this.Navbar.profileBar.click();
 });
 
 Then('a user info menu is toggled', async function () {
-    await this.expect(this.DashboardPage.profileMenu).toBeVisible();
+    await this.expect(this.Navbar.profileMenu).toBeVisible();
 });
 
 Then('it contains a link to profile', async function () {
@@ -116,7 +116,7 @@ Then('it contains a link to disconnect', async function () {
 
 // TestID_38: BIOMEDIQA redirection
 When('the user clicks the BIOMEDIQA logo', async function () {
-    await this.DashboardPage.biomediqa_logo.click();
+    await this.Navbar.biomediqa_logo.click();
 });
 
 Then('the site BIOMEDIQA is opened in a new tab', async function () {

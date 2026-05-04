@@ -1,5 +1,5 @@
 const env = require('../environment/env-wrapper');
-const { DashboardPage } = require("../page-objects/DashboardPage");
+const { Navbar } = require("../page-objects/elements/Navbar");
 
 async function verifyPopupMessage(expectedMsg) {
     const popup_element = await this.page.locator("div[class*='ui-pnotify-container']");
@@ -13,9 +13,9 @@ async function redirectToDositrace() { //because for some reason the link has to
   await this.page.goto(env.dositraceURL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   if(await link.isVisible()){
       await link.click();
-      await this.page.waitForLoadState('networkidle', { timeout: 60000 } );
-      const Dashboard = new DashboardPage(this.page);
-      await Dashboard.toggleNav();
+      await this.page.waitForLoadState('load', { timeout: 60000 } );
+      const nav = new Navbar(this.page);
+      await nav.toggleNav();
   }
 }
 

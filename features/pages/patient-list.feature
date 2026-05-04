@@ -4,12 +4,12 @@ Feature: Patient list page functionality
     
     @TestID_214
     Scenario: Etat field displays correctly
-        Then "Etat" search box is visible
-        Then "Actifs" and "Supprimés"  options are available
+        When the user clicks "Etat" field
+        Then a search box and "Actifs" and "Supprimés" options are displayed
 
     @TestID_215
     Scenario: Etat field functions correctly
-        Then the user can filter by Etat correctly
+        Then the user can filter patient list by Etat
 
     #TestID_216 Ergonomie
 
@@ -36,7 +36,6 @@ Feature: Patient list page functionality
         Then a calender becomes visible to choose date of birth
 
     #@TestID_224 Ergonomie
-
     @TestID_225
     Scenario: The Date de naissance field filters correctly
         When the user filters by Date de naissance
@@ -63,7 +62,7 @@ Feature: Patient list page functionality
     
     @TestID_232
     Scenario: Choosing number of patients to list in one page
-        Then the user can choose to list 10 or 25 or 50 or 100 patients 
+        Then the user is able to change the number of patients displayed in the patient list 
 
     @TestID_233
     Scenario: Viewing patients

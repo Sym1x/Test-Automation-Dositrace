@@ -39,3 +39,14 @@ Feature: Excel generation interface
         When the user clicks on the modality field
         Then a dropdown list of modalities appears
         And the user can select a modality
+
+
+
+
+
+
+
+
+    @skip
+    Scenario: datatable in different pages
+        Then the datatable object works on all pages
