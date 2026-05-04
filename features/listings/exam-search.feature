@@ -16,7 +16,7 @@ Feature: Exam search page functionality
 
     @TestID_122
     Scenario: Date buttons functionality
-        Then the date field is updated according to the button clicked
+        Then the date field is updated in accordance with the button clicked
    
     @TestID_123
     Scenario: Filters sidebar displays correctly

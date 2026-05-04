@@ -1,9 +1,6 @@
 class DataTable {
     constructor(page) {
         this.page = page;
-
-        this.option_buttons = this.page.locator('.col-md-12.btn-group').first();
-
         this.dataTableWrapper = this.page.locator('.dataTables_wrapper').first();
         
         this.dataTable_length = this.dataTableWrapper.locator('.dataTables_length');

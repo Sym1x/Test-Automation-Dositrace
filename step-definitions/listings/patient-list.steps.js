@@ -37,14 +37,14 @@ When('the user clicks "Ajouter des filtres" for patient list', async function ()
 });
 Then('the user accesses a filters section containing "Date de naissance" and "Sexe"', async function () {
     await this.expect(this.PatientlistPage.dateFilter).toBeVisible();
-    await this.expect(this.PatientlistPage.sexFilter).toBeVisible();
+    await this.expect(this.PatientlistPage.genderFilter).toBeVisible();
 });
 
 
 // TestID_220: Dropdown field displays correctly
 When('the user clicks the Sexe field to filter', async function () {
     await this.PatientlistPage.addFiltersBtn.click();
-    await this.PatientlistPage.sexFilter.click();
+    await this.PatientlistPage.genderFilter.click();
 });
 Then('a search field along the options \\(Hommes, femmes, Non définis et Tous) become visible', async function () {
     await this.expect(this.PatientlistPage.filterDropdown.getByRole('textbox')).toBeVisible();
@@ -58,7 +58,7 @@ Then('a search field along the options \\(Hommes, femmes, Non définis et Tous) 
 // TestID_221: The Sexe field filters correctly
 When('the user filters by Sexe', async function () {
     await this.PatientlistPage.addFiltersBtn.click();
-    await this.PatientlistPage.sexFilter.click();
+    await this.PatientlistPage.genderFilter.click();
     await this.PatientlistPage.filterDropdown.getByText('Non défini').click();
     await this.PatientlistPage.filterBtn_filters.click();
     await this.page.waitForLoadState('load');
@@ -99,7 +99,7 @@ When('the user has filters enabled and clicks the Réinitialiser button', async 
 
     // set filters
     await this.PatientlistPage.addFiltersBtn.click();
-    await this.PatientlistPage.sexFilter.click();
+    await this.PatientlistPage.genderFilter.click();
     await this.PatientlistPage.filterDropdown.getByText('Femme').click();
     await this.PatientlistPage.dateFilter.locator('input').fill('13/02/1996');
     await this.PatientlistPage.dateFilter.locator('input').press('Enter');
