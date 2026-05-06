@@ -75,16 +75,16 @@ class DataTable {
         return await this.dataTable_pagination_info.innerText();
     };
     async goToFirstPage() {
-        await this.dataTable_pagination_inputs.locator('span.first:not(.disabled)').click();
+        await this.dataTable_pagination_inputs.locator('span.first').click();
     };
     async goToPreviousPage() {
-        await this.dataTable_pagination_inputs.locator('span.previous:not(.disabled)').click();
+        await this.dataTable_pagination_inputs.locator('span.previous').click();
     };
     async goToNextPage() {
-        await this.dataTable_pagination_inputs.locator('span.next:not(.disabled)').click();
+        await this.dataTable_pagination_inputs.locator('span.next').click();
     };
     async goToLastPage() {
-        await this.dataTable_pagination_inputs.locator('span.last:not(.disabled)').click();
+        await this.dataTable_pagination_inputs.locator('span.last').click();
     };
     
 }

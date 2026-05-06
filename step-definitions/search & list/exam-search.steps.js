@@ -54,7 +54,7 @@ Then('the date field is updated in accordance with the button clicked', async fu
 });
 
 
-// TestID_123: The filters sidebar displays correctly
+// TestID_123: The Advanced Filtering sidebar displays correctly
 When('the user clicks "Ajouter des filtres" for searching exams', async function () {
     await this.ExamSearchPage.addFiltersBtn.click();
 });

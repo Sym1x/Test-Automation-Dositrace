@@ -19,7 +19,7 @@ Then("the user can choose between displaying the exams set for today or the exam
 });
 
 
-// TestID_93: Filters sidebar displays correctly
+// TestID_93: Advanced Filtering sidebar displays correctly
 When('the user clicks "Ajouter des filtres" for worklist', async function () {
     await this.WorklistPage.addFiltersBtn.click();
 });
@@ -38,6 +38,7 @@ When('the user clicks the UF filter in worklist filters', async function() {
 Then('a field listing the corresponding UF items becomes visible', async function () {
     await this.expect(this.page.locator('#select2-drop').getByRole('textbox')).toBeVisible();
 });
+
 
 // TestID_101: Clicking the Equipement filter
 When('the user clicks the Equipement filter in worklist filters', async function () {
@@ -139,8 +140,8 @@ Then('the user is able to change the number of exams displayed in the worklist',
 Then('the user can search through exams globally', async function () {
     const search_word = 'Eva';
     await this.exam_table.searchGlobally(search_word);
-    const result = this.exam_table.getRowTexts();
-    const found = result.some(innerArr => innerArr.includes(search_word));
+    const rows = await this.exam_table.getRowTexts();
+    const found = rows.some(row =>row.some(cell => cell.includes(keyword)));
     await this.expect(found).toBe(true);
 });
 

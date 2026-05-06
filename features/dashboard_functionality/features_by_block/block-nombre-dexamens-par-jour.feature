@@ -9,7 +9,7 @@ Feature: Nombre dexamens par jour block functionality
         When the user checks the number of exams for the year 2025 from the block
         Then the number of exams should match the one on the Exams page for that year
     
-    #@TestID_86 nocando (we'll see)
+    #@TestID_86 nocando
     
     @TestID_88
     @TestID_87

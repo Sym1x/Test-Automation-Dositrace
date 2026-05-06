@@ -31,7 +31,7 @@ Then('the user can filter patient list by Etat', async function () {
 });
 
 
-// TestID_217: Filters sidebar displays correctly
+// TestID_217: Advanced Filtering sidebar displays correctly
 When('the user clicks "Ajouter des filtres" for patient list', async function () {
     await this.PatientlistPage.addFiltersBtn.click();
 });

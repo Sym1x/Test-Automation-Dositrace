@@ -8,7 +8,7 @@ Feature: Exam search page functionality
         Then a calendar becomes visible allowing to choose the start date and end date
 
     @TestID_118
-    Scenario: Date field functionality
+    Scenario: Date field user experience
         Then the user can enter dates manually
         Then the user can enter dates using the calendar
     
@@ -19,7 +19,7 @@ Feature: Exam search page functionality
         Then the date field is updated in accordance with the button clicked
    
     @TestID_123
-    Scenario: Filters sidebar displays correctly
+    Scenario: Advanced Filtering sidebar displays correctly
         When the user clicks "Ajouter des filtres" for searching exams
         Then the user can select from the filters:
             |   UF                  |

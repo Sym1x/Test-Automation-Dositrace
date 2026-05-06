@@ -60,6 +60,6 @@ When('the user clicks Date', async function () {
     await this.NotificationPage.calendar.click();
 });
 
-Then('a calendar opens', async function () {
+Then('a calendar is displayed', async function () {
     await this.expect(this.NotificationPage.calendar).toHaveClass(/active/);
 });

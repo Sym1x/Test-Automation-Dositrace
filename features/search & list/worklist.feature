@@ -7,7 +7,7 @@ Feature: Worklist page functionality
         Then the user can choose between displaying the exams set for today or the exams set for the next 7 days
 
     @TestID_93
-    Scenario: Filters sidebar displays correctly
+    Scenario: Advanced Filtering sidebar displays correctly
         When the user clicks "Ajouter des filtres" for worklist
         Then the user accesses a filters section containing "UF" and "Equipement"
       

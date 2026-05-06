@@ -10,8 +10,8 @@ class ExamSearchPage {
         this.filterBtn = this.page.getByRole('button', { name: 'Filtrer' }).first();
         this.reinitializeBtn = this.page.getByRole('button', { name: 'Réinitialiser' }).first();
 
-        /*
         this.addFiltersBtn = this.page.getByText('Ajouter des filtres');
+        /*
         this.closeFilters = this.page.locator('#closeButton');
         this.timeSlider = this.page.locator('#filter_4');
         this.UF_filter = this.page.locator('#filter_1');

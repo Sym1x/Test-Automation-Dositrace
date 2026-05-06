@@ -14,9 +14,8 @@ Feature: Functional profile interface
         When the user chooses a different language
         Then the language changes
 
-    @skip
-    @TestID_28
-    Scenario: Affichage/Ergonomie
+    #@TestID_28
+    #Scenario: Affichage/Ergonomie
 
     @TestID_29
     Scenario: Edit profile page

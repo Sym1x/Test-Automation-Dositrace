@@ -14,7 +14,7 @@ Feature: Patient list page functionality
     #TestID_216 Ergonomie
 
     @TestID_217
-    Scenario: Filters sidebar displays correctly
+    Scenario: Advanced Filtering sidebar displays correctly
         When the user clicks "Ajouter des filtres" for patient list
         Then the user accesses a filters section containing "Date de naissance" and "Sexe"
 

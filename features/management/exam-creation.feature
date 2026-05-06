@@ -28,5 +28,5 @@ Feature: Exam creation page functionality
         When the user clicks the "Heure" field
         Then an input bar allowing to choose Exam Creation time becomes visibile
 
-    @TestID_299
-    Scenario: Accession number #revisit
+    #@TestID_299
+    #Scenario: Accession number #revisit

@@ -4,36 +4,30 @@ Feature: Excel generation interface
     Background:
         Given the user is on the excel generation page
 
-    @skip
     @TestID_539
     Scenario: Specifying period
         When the period field is visible
         Then the user can choose one of the 4 predefined periods
         And the user can specify a period manually with the calendar widget
-    @skip
     @TestID_540
     Scenario: Selecting a UF from the dropdown
         When the user clicks on the UF field
         Then a dropdown list of UFs appears
         And the user can search or select a UF
-    @skip
     @TestID_541
     Scenario: Checking presence of all UFs from configuration
         When the user opens the UF dropdown
         Then all UFs registered in Configuration Center are present
-    @skip
     @TestID_542
     Scenario: Selecting an equipment
         When the user clicks on the equipment field
         Then a dropdown list of equipments appears
         And the user can select an equipment
-    @skip
     @TestID_543
     Scenario: Selecting a doctor
         When the user clicks on the doctor field
         Then a dropdown list of doctors appears
         And the user can select a doctor
-    @skip
     @TestID_544
     Scenario: Selecting a modality
         When the user clicks on the modality field
