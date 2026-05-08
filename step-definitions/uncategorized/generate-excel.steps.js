@@ -1,8 +1,11 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
+const { Form } = require('../../page-objects/elements/Form');
+const { DataTable } = require('../../page-objects/elements/DataTable');
+const { WorklistPage } = require('../../page-objects/WorklistPage');
+
 
 Given("the user is on the excel generation page", async function () {
-    await this.page.goto("/excel-generation");
 });
 
 
@@ -110,11 +113,14 @@ Then("the user can select a modality", async function () {
 
 
 
-Then("the datatable object works on all pages", async function () {
+Then("the form object works on all pages", async function () {
     await this.utils.redirectToDositrace();
     this.exam_table = new DataTable(this.page);
 
     await this.page.goto('http://10.0.5.14:8080/DositraceV2-war/Worklist');
-    await this.page.getByText('Examens à 7 jours').click();
-    console.log(await this.exam_table.getColumnNames());
+    this.filters_form = new Form(this.page.locator('#page-rightbar'));
+    const data = { 'UF': 'Unité fonctionnelle de démonstration', 'Equipement': 'Libellé'};
+    await this.filters_form.fillForm(data);
+
+    await this.page.waitForTimeout(10000);
 });

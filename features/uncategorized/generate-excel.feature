@@ -41,6 +41,5 @@ Feature: Excel generation interface
 
 
 
-    @skip
-    Scenario: datatable in different pages
-        Then the datatable object works on all pages
+    Scenario: form in different pages
+        Then the form object works on all pages

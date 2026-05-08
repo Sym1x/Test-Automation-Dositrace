@@ -28,11 +28,15 @@ class Form {
     }
 
     async fillField(labelText, value) {
-        const field = this.formWrapper.getFieldByLabel(labelText);
+        let field = await this.getFieldByLabel(labelText);
+        const id = await field.getAttribute('id');
+        // select2 is a problem child
+        if (id?.startsWith('s2id_')) {
+            field = this.labels.filter({ hasText: labelText }).locator('..').locator('select');
+        }
 
         const tag = await field.evaluate(el => el.tagName.toLowerCase());
-        const type = await field.evaluate(el => el.type);
-
+        const type = await field.getAttribute('type');
         if (tag === 'select') {
             return field.selectOption(value);
         }
@@ -41,7 +45,6 @@ class Form {
             return field.fill(value);
         }
         
-        throw new Error(`Unsupported field type for "${labelText}": ${tag}/${type}`);
     }
 
     async fillForm(data) {

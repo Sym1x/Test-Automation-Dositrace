@@ -45,7 +45,7 @@ async function refactorSheet() {
         const tests_output_data = JSON.parse(jsonData);
         Object.keys(tests_output_data[0]).forEach(attribute => {
             
-            if(attribute != "name" && attribute != "error") {
+            if(attribute != "name") {
 
                 worksheet.getCell(8, newHeaderCol).value = attribute;
                 worksheet.mergeCells(8, newHeaderCol, 9, newHeaderCol);
