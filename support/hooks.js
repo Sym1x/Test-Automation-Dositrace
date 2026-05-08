@@ -8,7 +8,7 @@ const output = [];
 
 let browser;
 BeforeAll(async function () {
-  browser = await chromium.launch({ headless: true });
+  browser = await chromium.launch({ headless: false });
 })
 
 Before(async function (scenario) {

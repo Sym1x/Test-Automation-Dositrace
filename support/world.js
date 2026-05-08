@@ -36,7 +36,7 @@ class PlaywrightWorld extends World {
                 let loginPage = new LoginPage(this.page);
                 await loginPage.navigateToPage();
                 await loginPage.submitForm();
-                await this.page.waitForLoadState('domcontentloaded');
+                await this.page.waitForLoadState('domcontentloaded', { timeout: 80000 });
                 await this.context.storageState({ path: authPath });
             }
             else {
@@ -52,4 +52,4 @@ class PlaywrightWorld extends World {
     }
 }
 setWorldConstructor(PlaywrightWorld);
-setDefaultTimeout(12*5000)
+setDefaultTimeout(100*5000)

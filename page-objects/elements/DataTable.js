@@ -1,7 +1,6 @@
 class DataTable {
-    constructor(page) {
-        this.page = page;
-        this.dataTableWrapper = this.page.locator('.dataTables_wrapper').first();
+    constructor(dataTableWrapper) {
+        this.dataTableWrapper = dataTableWrapper;
         
         this.dataTable_length = this.dataTableWrapper.locator('.dataTables_length');
         this.search_bar = this.dataTableWrapper.locator('.dataTables_filter .form-control');
