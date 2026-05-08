@@ -31,6 +31,7 @@ async function updateSheet() {
         })
         
         await workbook.xlsx.writeFile(tests_sheet);
+        console.log("Updated the spreadsheet with the latest test results successfully !")
 
     } catch(err) {
         console.log("Error: ", err);

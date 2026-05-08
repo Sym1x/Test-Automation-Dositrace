@@ -9,14 +9,9 @@ Given('the user is on the protocol selection and favoring page', async function 
 });
 
 When('the user selects Modalité and Equipement criteria and clicks Filtrer', async function () {
-        // const criteria = {'Modalité': 'Ostéodensitométrie', 'Equipement': 'OSTEO'};
-        await this.ProtocolSelectionFavoringPage.Form.fillField('Modalité', 'Ostéodensitométrie');
-        await this.page.waitForLoadState('networkidle');
-        await this.ProtocolSelectionFavoringPage.Form.fillField('Equipement', 'OSTEO');
-        await this.page.waitForLoadState('networkidle');
-        const btn = this.ProtocolSelectionFavoringPage.Form.filterBtn;
-        await btn.click();
-        await this.page.waitForTimeout(500);
+        const criteria = {'Modalité': 'Ostéodensitométrie', 'Equipement': 'OSTEO'};
+        await this.ProtocolSelectionFavoringPage.Form.fillForm(criteria);
+        await this.ProtocolSelectionFavoringPage.Form.filterBtn.click();
 });
 Then('the list of protocols is updated in accordance with the criteria chosen', async function () {
         const rows = await this.ProtocolSelectionFavoringPage.DataTable.getRowTexts();

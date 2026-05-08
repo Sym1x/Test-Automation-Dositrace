@@ -70,6 +70,7 @@ async function refactorSheet() {
 
         path.join(__dirname, 'Tests unitaires Dositrace.xlsx');
         await workbook.xlsx.writeFile(report);
+        console.log("Unit Tests Sheet refactored for automated tests successfully !");
 
     } catch(err) {
         console.error("Error: ", err);

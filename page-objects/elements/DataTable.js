@@ -24,6 +24,8 @@ class DataTable {
 
 
     async getColumnNames() {
+        await this.waitForRefreshing();
+
         const headers = await this.thead.locator('th').allInnerTexts();
         return headers;
     };
@@ -33,9 +35,13 @@ class DataTable {
 
 
     async getNumberOfRows() {
+        await this.waitForRefreshing();
+
         return await this.tbody.locator('tr').count();
     };
     async getRowTexts() {
+        await this.waitForRefreshing();
+
         const rows = (await this.tbody.locator('tr').all()).slice(0, 2);
         const result = [];
 
@@ -47,8 +53,9 @@ class DataTable {
     };
 
     async getCell(columnName, rowNumber) {
-        const headers = this.thead.locator('th');
+        await this.waitForRefreshing();
 
+        const headers = this.thead.locator('th');
         const count = await headers.count();
 
         let columnIndex = -1;
@@ -71,20 +78,32 @@ class DataTable {
     }
 
     async getPaginationInfo() {
+        await this.waitForRefreshing();
         return await this.dataTable_pagination_info.innerText();
     };
     async goToFirstPage() {
+        await this.waitForRefreshing();
         await this.dataTable_pagination_inputs.locator('span.first').click();
     };
     async goToPreviousPage() {
+        await this.waitForRefreshing();
         await this.dataTable_pagination_inputs.locator('span.previous').click();
     };
     async goToNextPage() {
+        await this.waitForRefreshing();
         await this.dataTable_pagination_inputs.locator('span.next').click();
     };
     async goToLastPage() {
+        await this.waitForRefreshing();
         await this.dataTable_pagination_inputs.locator('span.last').click();
     };
+
+
+    // the data table uses asynchronous frontend rendering
+    // this must be awaited to give us the okay before we try to retrieve any information
+    async waitForRefreshing() {
+        await this.dataTableWrapper.locator('#list_praw_processing').waitFor({ state: 'hidden',});
+    }
     
 }
 
