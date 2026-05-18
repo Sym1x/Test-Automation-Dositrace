@@ -3,7 +3,7 @@ const { DataTable } = require('../../page-objects/elements/DataTable');
 const { WorklistPage } = require('../../page-objects/WorklistPage');
 
 Given("the user is on the Worklist page", async function () {
-    await this.utils.redirectToDositrace();
+    await this.utils.redirectToDositrace(this.page);
 
     this.WorklistPage = new WorklistPage(this.page);
     await this.WorklistPage.navigateToPage();

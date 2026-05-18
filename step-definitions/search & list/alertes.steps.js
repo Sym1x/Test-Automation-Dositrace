@@ -4,7 +4,7 @@ const { AlertsPage } = require('../../page-objects/AlertsPage');
 const { Form } = require('../../page-objects/elements/Form');
 
 Given('the user is on the Alerts page', async function () {
-    await this.utils.redirectToDositrace();
+    await this.utils.redirectToDositrace(this.page);
 
     this.AlertsPage = new AlertsPage(this.page);
     await this.AlertsPage.navigateToPage();

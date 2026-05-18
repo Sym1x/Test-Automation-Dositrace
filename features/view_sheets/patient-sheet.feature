@@ -10,7 +10,9 @@ Feature: Patient sheet displaying patient informations
             |   E                   |
             |   Sexe                |
 
-    #@TestID_237 Ergonomie
+    @TestID_237 
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
 
     @adolescent
     @TestID_238

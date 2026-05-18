@@ -1,16 +1,20 @@
 const { Given, When, Then  } = require('@cucumber/cucumber');
+const { DashboardPage } = require("../../../page-objects/DashboardPage");
 
-Given("the Dashboard contains the {string} block", async function (blockName) {
+Given("the user is on the Dashboard containing the {string} block", async function (blockName) {
+    await this.utils.redirectToDositrace(this.page);
+
+    this.DashboardPage = new DashboardPage(this.page);
+    await this.DashboardPage.navigateToPage();
+
+    await this.DashboardPage.resetDashboard();
     await this.DashboardPage.addBlockByName(blockName);
-    const existingBlocks = await this.DashboardPage.getExistingBlockNames(); 
-    await this.expect(existingBlocks).toContain(blockName);
 });
 
 
 // TestID_52
 When('the user changes period', async function () {
-    this.worklist_block = this.page.locator('#el1');
-    this.before = await this.worklist_block.innerText();
+    this.before = await this.block.innerText();
     const inactivePeriodButtons = this.page.locator(`
         #btnPreviousMonth:not(.active),
         #btnCurrentMonth:not(.active),
@@ -21,7 +25,7 @@ When('the user changes period', async function () {
 });
 
 Then("the period filter does not affect the worklist block", async function () {
-    await this.expect(this.worklist_block).toHaveText(this.before);
+    await this.expect(this.block).toHaveText(this.before);
 
 });
 
@@ -30,12 +34,12 @@ Then("the period filter does not affect the worklist block", async function () {
 Then("the worklist contains at most 5 exams", async function () {
     const exams = this.page.locator('#workList tbody');
     const count = await exams.count();
-    expect(count).toBeLessThanOrEqual(5);
+    this.expect(count).toBeLessThanOrEqual(5);
 });
 
 
 // TestID_55
-Then("the worklist has the correct headers", async function () {
+Then("the worklist has the correct headers: heure, patient, equipement", async function () {
     const headers = this.page.locator('#workList thead td strong');
 
     await this.expect(headers.nth(0)).toHaveText('Heure');
@@ -46,7 +50,7 @@ Then("the worklist has the correct headers", async function () {
 
 // TestID_56
 When('The user clicks on the "Liste complète des examens planifiés" link', async function () {
-    const link = this.page.locator('#list-worklist a');
+    const link = this.page.getByRole('link', { name: 'Liste complète des examens' });
     await link.click();
 });
 Then('the Worklist window is displayed', async function () {

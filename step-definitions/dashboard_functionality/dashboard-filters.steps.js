@@ -2,32 +2,38 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const { DashboardPage } = require("../../page-objects/DashboardPage");
 
 Given("the user is on the Dashboard", async function () {
-    await this.utils.redirectToDositrace();
+    await this.utils.redirectToDositrace(this.page);
+
     this.DashboardPage = new DashboardPage(this.page);
     await this.DashboardPage.navigateToPage();
-    await this.DashboardPage.toggleNav();
 });
 
 // TestID_49: Presence of 2 filters
 Then("2 possible filters are visible", async function () {
-    await this.expect(this.DashboardPage.filterUF).toBeVisible();
-    await this.expect(this.page.locator('.btn-group.col-sm-12')).toBeVisible(); //locates period filter (a button group )
+    const UF_filter = await this.DashboardPage.filterForm.getFieldByLabel('UF');
+    const Period_filter = this.DashboardPage.filterForm.formWrapper.locator('#btnPreviousMonth, #btnCurrentMonth, #btnPreviousYear, #btnCurrentYear'); //locates period filter buttons
+
+    await this.expect(UF_filter).toBeVisible();
+    await this.expect(Period_filter.nth(0)).toBeVisible(); //locates period filter (a button group )
 });
 
 
 // TestID_50: Presence of 4 different periods to filter from
-Then("{int} different periods are visible", async function (expectedCount) {
-    const periods = this.DashboardPage.filterPeriod;
-    await this.expect(periods).toHaveCount(expectedCount);
-    for (let i = 0; i < expectedCount; i++) {
-        await this.expect(periods.nth(i)).toBeVisible();
+Then("4 different periods are visible and CurrentMonth is selected by default", async function (periodList) {
+    const periods = periodList.raw().flat();
+    for(const period of periods) {
+        const Period_button = this.DashboardPage.filterForm.formWrapper.locator('[id^="btn' + period + '"]');
+        await this.expect(Period_button).toBeVisible();
+        if(period === 'CurrentMonth')
+            await this.expect(Period_button).toHaveClass(/(^|\s)active(\s|$)/);
     }
 });
 
 // TestID_51: UF filter options
-When("the user clicks the UF filter", async function () {
-    await this.DashboardPage.filterUF_field.locator("a").click();
-});
 Then("the user can select to filter by all UF or choose a specific UF", async function () {
-    await this.expect(this.page.locator("ul.select2-results")).toBeVisible();
+    const options = await this.DashboardPage.filterForm.getOptions('UF');
+    if(options.length < 2)
+        throw new Error("No UF options are being displayed in the filter");
+    console.log(options);
+    await this.expect(options).toContain('...');
 });

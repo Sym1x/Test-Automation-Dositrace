@@ -1,7 +1,6 @@
 Feature: Historique Statistique block functionality
     Background:
-        Given the user is on an empty Dashboard
-        And the Dashboard contains the "Historique statistique" block
+        Given the user is on the Dashboard containing the "Historique statistique" block
 
     @TestID_60
     Scenario: Dashboard shows only the last 2 statistics
@@ -13,4 +12,6 @@ Feature: Historique Statistique block functionality
         Then the user should be redirected to the predefined statistics window
     
     
-    #@TestID_62 ergonomie
+    @TestID_62
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test

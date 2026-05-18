@@ -2,7 +2,7 @@ const { Given, When, Then  } = require('@cucumber/cucumber');
 const { Navbar } = require("../../page-objects/elements/Navbar");
 
 Given("the user is on Dositrace site", async function (){
-    await this.utils.redirectToDositrace();
+    await this.utils.redirectToDositrace(this.page);
     this.Navbar = new Navbar(this.page);
 });
 
@@ -10,7 +10,7 @@ Given("the user is on Dositrace site", async function (){
 // TestID_9: Navigation panel untoggled view
 Then('{int} elements for navigation are visible', async function (expectedCount) {
     const navItems_count = await this.Navbar.navItems.count();
-    await this.expect.soft(navItems_count).toBeGreaterThanOrEqual(expectedCount);
+    await this.expect.soft(navItems_count).toBe(expectedCount);
 });
 
 Then('the user can navigate through them', async function () {

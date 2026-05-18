@@ -2,12 +2,13 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const { ProtocolSelectionFavoringPage } = require('../../page-objects/ProtocolSelectionFavoringPage');
 
 Given('the user is on the protocol selection and favoring page', async function () {
-    await this.utils.redirectToDositrace(); // to access Dositrace
+    await this.utils.redirectToDositrace(this.page); // to access Dositrace
 
     this.ProtocolSelectionFavoringPage = new ProtocolSelectionFavoringPage(this.page);
     await this.ProtocolSelectionFavoringPage.navigateToPage();
 });
 
+// TestID_361: Filtrer button works correctly, updating the list of protocols with the correct chosen criteria
 When('the user selects Modalité and Equipement criteria and clicks Filtrer', async function () {
         const criteria = {'Modalité': 'Ostéodensitométrie', 'Equipement': 'OSTEO'};
         await this.ProtocolSelectionFavoringPage.Form.fillForm(criteria);

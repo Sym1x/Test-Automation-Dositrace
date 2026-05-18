@@ -1,7 +1,6 @@
 Feature: Nombre dexamens par jour block functionality
     Background:
-        Given the user is on an empty Dashboard
-        And the Dashboard contains the "Nombre d'examens par jour" block
+        Given the user is on the Dashboard containing the "Nombre d'examens par jour" block
 
 
     @TestID_85
@@ -17,7 +16,9 @@ Feature: Nombre dexamens par jour block functionality
         When the user clicks the sixth bar of the chart
         Then the user should be redirected to the Examens search page
 
-    #@TestID_89 ergonomie
+    @TestID_89
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
 
     @TestID_90
     Scenario: User opens the chart export menu

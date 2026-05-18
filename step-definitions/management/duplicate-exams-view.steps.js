@@ -2,7 +2,7 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const { DuplicateExams } = require('../../page-objects/DuplicateExams');
 
 Given('the user is on the View Duplicate Exams page', async function () {
-    await this.utils.redirectToDositrace();
+    await this.utils.redirectToDositrace(this.page);
 
     this.DuplicateExams = new DuplicateExams(this.page);
     await this.DuplicateExams.navigateToPage();

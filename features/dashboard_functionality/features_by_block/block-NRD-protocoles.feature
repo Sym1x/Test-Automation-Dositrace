@@ -1,7 +1,6 @@
 Feature: NRD Protocoles block functionality
     Background:
-        Given the user is on an empty Dashboard
-        And the Dashboard contains the "NRD/NRI local" block
+        Given the user is on the Dashboard containing the "NRD/NRI local" block
 
     @TestID_78
     Scenario: NRD/NRI protocol block displays top 6 most frequent protocols

@@ -2,7 +2,7 @@ const { Given, When, Then } = require('@cucumber/cucumber');
 const { NotificationPage } = require("../../page-objects/NotificationPage");
 
 Given('the user is on the Notification page', async function() {
-    await this.utils.redirectToDositrace();
+    await this.utils.redirectToDositrace(this.page);
     this.NotificationPage = new NotificationPage(this.page);
     await this.NotificationPage.navigateToPage();
 })

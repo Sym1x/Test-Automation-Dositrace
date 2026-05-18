@@ -1,7 +1,6 @@
 Feature: Informations block functionality
     Background:
-        Given the user is on an empty Dashboard
-        And the Dashboard contains the "Informations" block
+        Given the user is on the Dashboard containing the "Informations" block
 
 
     @TestID_82

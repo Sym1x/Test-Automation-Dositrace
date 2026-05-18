@@ -26,6 +26,9 @@ project-root/
 │   ├── *.feature        # Gherkin feature files
 │   └── login.feature
 │
-└── step-definitions/
-    ├── *.js             # Step implementations of scenarios from each feature
-    └── login.steps.js
+├── step-definitions/
+│   ├── *.js             # Step implementations of scenarios from each feature
+│   └── login.steps.js
+│
+└── utils/  # provides a set of reusable helpers for the tests, as well as logic for Error Handling and adding test dummies
+

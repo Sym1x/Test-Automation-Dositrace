@@ -1,7 +1,6 @@
 Feature: Alertes block functionality
     Background:
-        Given the user is on an empty Dashboard
-        And the Dashboard contains the "Alertes" block
+        Given the user is on the Dashboard containing the "Alertes" block
 
     @TestID_72
     Scenario: Alerts update after selecting period filter
@@ -21,7 +20,9 @@ Feature: Alertes block functionality
         When the user clicks on the alerts block
         Then the user should be redirected to the Alerts menu
     
-    #@TestID_76 ergonomie
+    @TestID_76
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
     
     @TestID_77
     Scenario: Navigating between alert pages using arrows updates the table content

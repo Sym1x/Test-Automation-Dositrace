@@ -28,7 +28,9 @@ Feature: Alerts page functionality
         Then a graphical calendar is displayed
         Then the user is able to select dates manually or graphically
 
-    #@TestID_445 Ergonomie
+    @TestID_445
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
 
     @TestID_446
     Scenario: Niveau field displays correctly

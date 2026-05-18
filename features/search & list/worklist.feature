@@ -27,7 +27,9 @@ Feature: Worklist page functionality
         When the user is selecting a UF or Equipement filter
         Then the user can search by inputting its name
     
-    #@TestID_96 Ergonomie
+    @TestID_96
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
 
     @TestID_98
     Scenario: UF filter functionality
@@ -45,22 +47,26 @@ Feature: Worklist page functionality
         When the user has selected a UF filter
         Then the user can remove the selected UF field
 
-    #@TestID_100 Ergonomie
+    @TestID_100
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
 
     @TestID_103
     Scenario: Removing the Equipement field
         When the user has selected an Equipement filter
         Then the user can remove the Equipement field
 
-    #@TestID_104 Ergonomie
-
     @TestID_104
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
+
     @TestID_105
+    @TestID_106
     Scenario: Filter exams for today vs for the next 7 days
         When the user chooses to display the exams set for the next 7 days
         Then the list of exams is updated accordingly
 
-    @TestID_106
+    @TestID_107
     Scenario: Exam sheet redirection
         When the user clicks a listed exam
         Then the user is redirected to a view of detailed information on the exam
@@ -82,6 +88,11 @@ Feature: Worklist page functionality
     Scenario: Urgent exams
         Then the table must correctly list urgent exams
 
+    @TestID_112
+    Scenario: Worklist navigation
+        Then the user is able to navigate the worklist using right and left arrows
+        Then the user is able to navigate the worklist using the number of page
+
     @TestID_113
     Scenario: Viewing patient
         When the user clicks the name of a patient in the worklist
@@ -97,4 +108,6 @@ Feature: Worklist page functionality
         When the user clicks the green status icon
         Then the details of the exam row are shown
 
-    #@TestID_116 Ergonomie
+    @TestID_116
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test

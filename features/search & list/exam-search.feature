@@ -12,7 +12,9 @@ Feature: Exam search page functionality
         Then the user can enter dates manually
         Then the user can enter dates using the calendar
     
-    #@TestID_121 Ergonomie
+    @TestID_121
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
 
     @TestID_122
     Scenario: Date buttons functionality
@@ -41,4 +43,6 @@ Feature: Exam search page functionality
         When the user clicks a filter
         Then a field listing the corresponding filter options becomes visible
 
-    #@TestID_127 Ergonomie
+    @TestID_127
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test

@@ -114,7 +114,7 @@ Then("the user can select a modality", async function () {
 
 
 Then("the form object works on all pages", async function () {
-    await this.utils.redirectToDositrace();
+    await this.utils.redirectToDositrace(this.page);
     this.exam_table = new DataTable(this.page);
 
     await this.page.goto('http://10.0.5.14:8080/DositraceV2-war/Worklist');

@@ -11,7 +11,9 @@ Feature: Patient list page functionality
     Scenario: Etat field functions correctly
         Then the user can filter patient list by Etat
 
-    #TestID_216 Ergonomie
+    @TestID_216
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
 
     @TestID_217
     Scenario: Advanced Filtering sidebar displays correctly
@@ -28,14 +30,19 @@ Feature: Patient list page functionality
         When the user filters by Sexe
         Then the patient list is updated in accordance with the chosen Sexe
 
-    #@TestID_222 Ergonomie
+    @TestID_222
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
     
     @TestID_223
     Scenario: Date de naissance input calendar displays correctly
         When the user clicks the Date de naissance field to filter
         Then a calender becomes visible to choose date of birth
 
-    #@TestID_224 Ergonomie
+    @TestID_224
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
+
     @TestID_225
     Scenario: The Date de naissance field filters correctly
         When the user filters by Date de naissance
@@ -58,7 +65,9 @@ Feature: Patient list page functionality
     Scenario: Navigating the patient list
         Then the user can use the arrows to navigate the patient list
     
-    #@TestID_231 Ergonomie
+    @TestID_231
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
     
     @TestID_232
     Scenario: Choosing number of patients to list in one page
@@ -69,5 +78,7 @@ Feature: Patient list page functionality
         When the user clicks the name of a patient in the patient list page
         Then the user is redirected to view the sheet of the patient
     
-    #@TestID_234 Ergonomie
+    @TestID_234
+    Scenario: Affichage/Ergonomie
+        Then ergonomie test
 

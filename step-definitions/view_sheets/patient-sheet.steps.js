@@ -1,7 +1,7 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 
 Given('the user is viewing a patient sheet page', async function () {
-    await this.utils.redirectToDositrace();
+    await this.utils.redirectToDositrace(this.page);
     if(this.tags.includes('@adolescent')) {
         await this.page.goto('http://10.0.5.14:8080/DositraceV2-war/ViewPatient?id=111384');
     }
@@ -12,7 +12,7 @@ Given('the user is viewing a patient sheet page', async function () {
 
 
 
-// TestingID_236: Patient header displays correctly
+// TestID_236: Patient header displays correctly
 Then('the patient header contains the informations', async function (dataTable) {
     const expectedTexts = dataTable.raw().flat();
     console.log(expectedTexts);
@@ -22,7 +22,7 @@ Then('the patient header contains the informations', async function (dataTable) 
 });
 
 
-// TestingID_237: Additional information for young patients 
+// TestID_237: Additional information for young patients 
 Then('"Statut pédiatrique" is visible for patients under 18', async function () {
     await this.expect(this.page.locator('#wrap')).toContainText('Statut pédiatrique');
 });

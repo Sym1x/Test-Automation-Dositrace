@@ -1,7 +1,6 @@
 Feature: Rappel block functionality
     Background:
-        Given the user is on an empty Dashboard
-        And the Dashboard contains the "Rappels" block
+        Given the user is on the Dashboard containing the "Rappels" block
 
     @TestID_63
     Scenario: Unprocessed alerts count is correct

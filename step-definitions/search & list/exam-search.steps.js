@@ -3,7 +3,7 @@ const { DataTable } = require('../../page-objects/elements/DataTable');
 const { ExamSearchPage } = require('../../page-objects/ExamSearchPage');
 
 Given('the user is on the Exam Search page', async function () {
-    await this.utils.redirectToDositrace();
+    await this.utils.redirectToDositrace(this.page);
 
     this.ExamSearchPage = new ExamSearchPage(this.page);
     await this.ExamSearchPage.navigateToPage();

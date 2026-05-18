@@ -30,3 +30,6 @@ Feature: Exam creation page functionality
 
     #@TestID_299
     #Scenario: Accession number #revisit
+
+    Scenario: testing
+        Then the user is testing his stuff
