@@ -1,7 +1,7 @@
 const { When, Then } = require('@cucumber/cucumber');
 
 // TestID_60: Dashboard shows only the last 2 statistics
-Then("only the 2 most recent statistics are shown", async function () {
+Then("the 2 most recent statistics are shown", async function () {
     const stats = this.page.locator('#history-stat a.card');
 
     const count = await stats.count();
@@ -17,6 +17,6 @@ When('the user clicks on "Voir l\'ensemble des statistiques"', async function ()
     await statsLink.click();
 });
 
-Then('the user should be redirected to the predefined statistics window', async function () {
+Then('the user should be redirected to the statistics menu', async function () {
     await this.expect(this.page).toHaveURL(/ChartDashboard/);
 });

@@ -34,6 +34,6 @@ Then("the user can select to filter by all UF or choose a specific UF", async fu
     const options = await this.DashboardPage.filterForm.getOptions('UF');
     if(options.length < 2)
         throw new Error("No UF options are being displayed in the filter");
-    console.log(options);
-    await this.expect(options).toContain('...');
+    if (!options.includes("..."))
+        throw new Error("UF filter does not have an option to select all UF");
 });

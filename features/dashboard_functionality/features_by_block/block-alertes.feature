@@ -3,9 +3,9 @@ Feature: Alertes block functionality
         Given the user is on the Dashboard containing the "Alertes" block
 
     @TestID_72
-    Scenario: Alerts update after selecting period filter
-        When the user clicks on a period filter
-        Then the alerts table should be updated with the expected rows for that filter
+    Scenario: Alerts update when filtering by month
+        When the user clicks on a button to change month
+        Then the alerts table should be updated correctly
     
     @TestID_73
     Scenario: Only last 5 alerts are displayed

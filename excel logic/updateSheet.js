@@ -16,22 +16,32 @@ async function updateSheet() {
         const tests_output_data = JSON.parse(jsonData);
 
         const headerRow = worksheet.getRow(8);
+
+        let previousHeaderValue = null;
         headerRow.eachCell((headerCell, colNumber) => {
             if(headerCell.value && headerCell.value in tests_output_data[0]) {
                 worksheet.getColumn(colNumber).eachCell({ includeEmpty: true }, (cell, rowNumber) => {
                     if(rowNumber > 9) {
                         const match = tests_output_data.find(entry => parseInt(entry.id, 10) + 9 === rowNumber);
                         if (match) {
-                            cell.value = match[headerCell.value];
+                            if(headerCell.value === previousHeaderValue) {
+                                if(match[headerCell.value] === "VRAI")
+                                    cell.value = "FAUX";
+                                if(match[headerCell.value] === "FAUX")
+                                    cell.value = "VRAI";
+                            } else {
+                                cell.value = match[headerCell.value];
+                            }
                         }
                     }
                 });
+                previousHeaderValue = headerCell.value;
             }
                 
-        })
+        });
         
         await workbook.xlsx.writeFile(tests_sheet);
-        console.log("Updated the spreadsheet with the latest test results successfully !")
+        console.log("Updated the spreadsheet with the latest test results successfully !");
 
     } catch(err) {
         console.log("Error: ", err);

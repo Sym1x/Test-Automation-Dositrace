@@ -10,28 +10,38 @@ Given("the user is on Dositrace site", async function (){
 // TestID_9: Navigation panel untoggled view
 Then('{int} elements for navigation are visible', async function (expectedCount) {
     const navItems_count = await this.Navbar.navItems.count();
-    await this.expect.soft(navItems_count).toBe(expectedCount);
+    if(expectedCount != navItems_count) {
+        throw new Error(`Expected ${expectedCount} navigation items, found: ${navItems_count}`);
+    }
 });
 
 Then('the user can navigate through them', async function () {
-    const navItems = this.Navbar.navItems;
-    const navItems_count = await navItems.count();
+    const navItems_count = await this.Navbar.navItems.count();
     for (let i = 0; i < navItems_count; i++) {
-        await navItems.nth(i).click();
-        await this.page.waitForLoadState('load');
+        try {
+            await navItems.nth(i).click();
+            await this.page.waitForLoadState('load');
+        } catch (err) {
+            throw new Error(`Failed to click nav item #${i}:`, err);
+        }
     }
 });
 
 
 // TestID_10: Navigation panel toggled view
 When('the user clicks toggle button', async function () {
-    await this.Navbar.toggleNav_trigger.click(); // toggled
+    try {
+        await this.Navbar.toggleNav_trigger.click(); // toggled
+    } catch (err) {
+        throw new Error('Could not click toggle button to toggle the navigation panel into detailed view');
+    }
 });
 
 Then('the navigation panel switches between toggled and untoggled view', async function () {
     await this.expect(this.Navbar.navZone).not.toHaveClass(/toggled/);
     
     await this.Navbar.toggleNav_trigger.click(); // untoggled
+    
     await this.expect(this.Navbar.navZone).toHaveClass(/toggled/);
 });
 
@@ -48,31 +58,39 @@ Then('the user accesses the Dashboard', async function () {
 
 // TestID_12: Accessing user manual
 When('the user clicks ?', async function () {
-    await this.Navbar.helpButton.click();
+    try {
+        await this.Navbar.helpButton.click();
+    } catch(err) {
+        throw new Error('Failed to click the ? help mark');
+    }
+    await this.page.waitForLoadState('load');
 });
 
 Then('the user accesses Dositrace\'s User Manual', async function () {
-    await this.expect(this.page).toHaveURL(/.*Dositrace.*UserManualDositrace|manual|user-guide|documentation.*/);
+    try {
+        await this.expect(this.page).toHaveURL(/.*Dositrace.*UserManualDositrace|manual|user-guide|documentation.*/);
+    } catch(err) {
+        throw new Error('Failed to access User Manual. Page landed on (after clicking ?): ' + this.page.url());
+    }
 });
 
 Then('the manual contains {int} cards', async function (expectedCount) {
-    this.manual_cards = this.page.locator('div .col-lg-4 > .card');
-    this.manual_cards_count = await this.manual_cards.count();
-    await this.expect.soft(this.manual_cards_count).toBe(expectedCount);
+    const manual_cards = this.page.locator('div .col-lg-4 > .card');
+    const manual_cards_count = await manual_cards.count();
+    if(manual_cards_count != expectedCount)
+        throw new Error(`Expected ${expectedCount} cards in the help manual, found: ${manual_cards_count}`);
 });
 
 Then('each manual card takes to a page successfully', async function () {
     const manual_URL = await this.page.url();
 
     for (let i = 0; i < this.manual_cards_count; i++) {
-        const firstLink = this.manual_cards.nth(i).locator('.card-body a').first();
+        const card_link = this.manual_cards.nth(i).locator('.card-body a').first();
 
-        await this.expect(firstLink).toBeVisible({ timeout: 10000 });
+        await this.expect(card_link).toBeVisible({ timeout: 10000 });
 
-        await Promise.all([
-            this.page.waitForLoadState('load'),
-            firstLink.click(),
-        ]);
+        card_link.click()
+        this.page.waitForLoadState('load'),
 
         await this.expect(this.page).not.toHaveURL(manual_URL);
 

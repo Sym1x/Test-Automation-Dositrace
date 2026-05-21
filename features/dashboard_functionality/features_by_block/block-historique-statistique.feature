@@ -4,12 +4,12 @@ Feature: Historique Statistique block functionality
 
     @TestID_60
     Scenario: Dashboard shows only the last 2 statistics
-        Then only the 2 most recent statistics are shown
+        Then the 2 most recent statistics are shown
 
     @TestID_61
     Scenario: Access predefined statistics from dashboard
         When the user clicks on "Voir l'ensemble des statistiques"
-        Then the user should be redirected to the predefined statistics window
+        Then the user should be redirected to the statistics menu
     
     
     @TestID_62

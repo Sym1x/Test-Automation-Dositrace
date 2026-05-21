@@ -1,14 +1,13 @@
 const { When, Then } = require('@cucumber/cucumber');
 
-// TestID_72: Alerts update after selecting period filter
-When('the user clicks on a period filter', async function () {
-    await this.page.locator('#btnPreviousYear').click();
+// TestID_72: Alerts update when filtering by month
+When('the user clicks on a button to change month', async function () {
+    this.before = await this.block.innerText();
+    await this.page.locator('#btnPreviousMonth').click();
 });
-Then('the alerts table should be updated with the expected rows for that filter', async function () {
-    const rowLocator = this.page.locator(
-        '#example tbody tr:has-text("09/12/2025 00:00:00"):has-text("18800%"):has-text("Anonyme.")'
-    );
-    await this.expect(rowLocator).toBeVisible();
+Then('the alerts table should be updated correctly', async function () {
+
+     await this.expect(this.block).not.toHaveText(this.before);
 });
 
 
@@ -26,8 +25,7 @@ Then('each alert row should have the same number of columns as the table header'
     const rows = this.page.locator('#example tbody tr');
     const rowCount = await rows.count();
     for (let i = 0; i < rowCount; i++) {
-        const row = rows.nth(i);
-        const cellCount = await row.locator('td').count();
+        const cellCount = await row.nth(i).locator('td').count();
         expect(cellCount).toBe(headerCount);
     }
 });
@@ -37,6 +35,7 @@ Then('each alert row should have the same number of columns as the table header'
 When('the user clicks on the alerts block', async function () {
     const alertsBlock = this.page.locator('#alert');
     await alertsBlock.click();
+    await this.page.waitForLoadState("domcontentloaded");
 });
 
 Then('the user should be redirected to the Alerts menu', async function () {

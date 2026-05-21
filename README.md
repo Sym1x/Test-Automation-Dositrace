@@ -31,4 +31,3 @@ project-root/
 │   └── login.steps.js
 │
 └── utils/  # provides a set of reusable helpers for the tests, as well as logic for Error Handling and adding test dummies
-

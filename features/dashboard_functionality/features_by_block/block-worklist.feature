@@ -11,7 +11,6 @@ Feature: Worklist block functionality
     Scenario: Worklist shows only the next 5 exams
         Then the worklist contains at most 5 exams
 
-    
     @TestID_54
     Scenario: Affichage/Ergonomie
         Then ergonomie test

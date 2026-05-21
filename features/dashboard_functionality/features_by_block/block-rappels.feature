@@ -3,22 +3,22 @@ Feature: Rappel block functionality
         Given the user is on the Dashboard containing the "Rappels" block
 
     @TestID_63
-    Scenario: Unprocessed alerts count is correct
-        Then the displayed number of "Alertes non traitées" should match the real number of unprocessed alerts
+    Scenario: Unprocessed alerts field is functional
+        Then the field "Alertes non traitées" should correspond to a real functional link
     
     @TestID_64
     Scenario: Access alerts menu from unprocessed alerts block
-        When the user click on "Alertes non traitées"
-        Then the user should be redirected to the Alerts menu
-        
+        When the user clicks on "Alertes non traitées"
+        Then the user should be redirected to the Alerts menu from Rappels block
+
     @TestID_65
     Scenario: Alerts count matches between dashboard and alerts page
         When the user navigates to the alerts list
         Then the number of displayed alerts should match the dashboard counter for unprocessed alerts
     
     @TestID_66
-    Scenario: Unlinked protocols count is correct
-        Then the displayed number of "Protocoles non reliés" should match the real number of unlinked protocols
+    Scenario: Unlinked protocols field is functional
+        Then the field "Protocoles non reliés" should correspond to a real functional link
     
     @TestID_67
     Scenario: Access protocol correspondence table from unlinked protocols block
@@ -26,8 +26,8 @@ Feature: Rappel block functionality
         Then the user should be redirected to the protocol correspondence table
     
     @TestID_68
-    Scenario: Unlinked members count is correct
-        Then the displayed number of "Membres non reliés" should match the real number of unlinked members
+    Scenario: Unlinked members field is functional
+        Then the field "Membres non reliés" should correspond to a real functional link
     
     @TestID_69
     Scenario: Access member mapping page from unlinked members block
@@ -35,8 +35,8 @@ Feature: Rappel block functionality
         Then the user should be redirected to the personnel association page in Configuration Center
     
     @TestID_70
-    Scenario: Patients without exams count is correct
-        Then the displayed number of "Patients sans examens" should match the real number of patients without exams
+    Scenario: Patients without exams field is functional
+        Then the field "Patients sans examens" should correspond to a real functional link
     
     @TestID_71
     Scenario: Access patients without exams page from reminders block

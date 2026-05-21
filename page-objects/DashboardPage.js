@@ -1,6 +1,8 @@
 const env = require('../environment/env-wrapper');
 const { Form } = require('./elements/Form');
 
+const { DataTable } = require('./elements/DataTable');
+
 class DashboardPage {
     constructor(page){
         this.page = page;
@@ -14,6 +16,9 @@ class DashboardPage {
         this.savePositionBtn = this.page.locator('#btn-save');
 
         this.filterForm = new Form(this.page.locator('.btn-group.col-sm-12').first());
+
+        this.data_table_obj = new DataTable(this.page.locator('.dataTables_wrapper')); // needed in particular block tests
+
     }
     
     async navigateToPage() {

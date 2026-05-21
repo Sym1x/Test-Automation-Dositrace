@@ -10,18 +10,22 @@ Feature: Notification functionality
         And it contains a link to see all notifications
 
     @TestID_16
-    @TestID_17
-    Scenario: Accessing the notifications interface
+    Scenario: Filtering notifications
         When the user clicks either link from the dropdown
-        Then the user is redirected to the notifications interface
-        And the user can filter notifications according to different criteria
+        Then the user can filter notifications on the notifications interface according to different criteria
             | vus                          |
             | type                         |
             | application                  |
             | date                         |
             | rechercher                   |
             | nombre d'élements à afficher |
+
+    @TestID_17
+    Scenario: Accessing the notifications interface
+        When the user clicks link to see all notifications from the dropdown
+        Then the user is redirected to the notifications interface
             
+    @tesing
     @TestID_18
     Scenario: Marking notifications as read
         When the user clicks mark all as read

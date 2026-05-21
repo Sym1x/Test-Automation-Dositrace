@@ -14,10 +14,10 @@ Given("the user is on a non empty Dashboard", async function () {
 // TestID_45: Caching block deletion
 When('the user clicks Supprimer and then the user clicks on the trash can icon on a block', async function () {
     await this.DashboardPage.deleteBlockBtn.click();
-    first_block = this.DashboardPage.blocks.first();
+    const first_block = this.DashboardPage.blocks.first();
     this.first_block_name = await this.DashboardPage.getBlockName(first_block);
 
-    trash_can = first_block.locator('.fa-trash-can');
+    const trash_can = first_block.locator('.fa-trash-can');
     await this.expect(trash_can).toBeVisible();
     await trash_can.click();
 });

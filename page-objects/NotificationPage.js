@@ -1,4 +1,6 @@
 const env = require('../environment/env-wrapper');
+const { DataTable } = require('./elements/DataTable');
+const { Form } = require('./elements/Form');
 
 class NotificationPage {
     constructor(page){
@@ -6,7 +8,7 @@ class NotificationPage {
 
         this.bell = this.page.locator('a.hasnotifications.dropdown-toggle');
         this.notifications_dropdown = this.page.locator('.dropdown-menu.notifications.arrow');
-        this.filter_div = this.page.locator('div.form-group.row.col-md-12');
+        this.filtering_form = new Form(this.page.locator('div.form-group.row.col-md-12'));
         this.calendar = this.page.locator('#daterangepicker1');
     }
     

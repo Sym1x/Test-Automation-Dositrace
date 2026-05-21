@@ -9,6 +9,8 @@ class DataTable {
         this.thead = this.table.locator('thead > tr');
         this.tbody = this.table.locator('tbody');
 
+        this.table_rows = this.tbody.locator('tr');
+
         this.dataTable_pagination_info = this.dataTableWrapper.locator('.dataTables_info');
         this.dataTable_pagination_inputs = this.dataTableWrapper.locator('.dataTables_paginate.paging_input');
     };
@@ -16,10 +18,12 @@ class DataTable {
     async changeTableLength(new_length) {
         const lengthSelect = this.dataTable_length.locator('select');
         await lengthSelect.selectOption(String(new_length));
+        await this.waitForRefreshing();
     };
 
     async searchGlobally(keyword) {
         await this.search_bar.type(String(keyword));
+        await this.waitForRefreshing();
     };
 
 
@@ -36,8 +40,11 @@ class DataTable {
 
     async getNumberOfRows() {
         await this.waitForRefreshing();
-
-        return await this.tbody.locator('tr').count();
+        const numberOfRows = await this.tbody.locator('tr').count();
+        const text = await this.tbody.locator('tr').first().innerText();
+        if(numberOfRows === 1 && (text.includes('Aucune donnée') || text.includes('Aucun élément')))
+            return 0;
+        return numberOfRows;
     };
     async getRowTexts() {
         await this.waitForRefreshing();
@@ -77,6 +84,8 @@ class DataTable {
         return row.locator('td').nth(columnIndex);
     }
 
+
+
     async getPaginationInfo() {
         await this.waitForRefreshing();
         return await this.dataTable_pagination_info.innerText();
@@ -102,7 +111,7 @@ class DataTable {
     // the data table uses asynchronous frontend rendering
     // this must be awaited to give us the okay before we try to retrieve any information
     async waitForRefreshing() {
-        await this.dataTableWrapper.locator('#list_praw_processing').waitFor({ state: 'hidden',});
+        await this.dataTableWrapper.locator('.dataTables_processing').waitFor({ state: 'hidden',});
     }
     
 }

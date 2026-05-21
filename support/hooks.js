@@ -9,7 +9,7 @@ const output = [];
 let browser;
 BeforeAll(async function () {
   browser = await chromium.launch({ headless: false });
-})
+});
 
 Before(async function (scenario) {
   this.browser = browser;
@@ -31,9 +31,14 @@ After(async function (scenario) {
   for (const id of testIds) {
     output.push({
       id,
-      name: scenario.pickle.name,
-      status: scenario.result.status,
-      error: scenario.result?.message?.replace(/\u001b\[[0-9;]*m/g, '').split("\n")[0] ?? null
+      "Nom du testeur": "Système",
+      "Date de tests": this.utils.getDateAfter(),
+      "Fait": scenario.result?.status !== "UNDEFINED" ? "VRAI" : "FAUX",
+      "Opérationnel": scenario.result?.status === "PASSED" ? "VRAI" : "FAUX",
+      "Navigateur": scenario?.result?.parameters?.browser || "chromium",
+      "Commentaire": scenario.result?.message
+        ? scenario.result.message.replace(/\u001b\[[0-9;]*m/g, '').split("\n")[0]
+        : ""
     });
   }
   //-----------------
@@ -56,4 +61,4 @@ AfterAll(async function() {
   }
   
   await browser.close();
-})
+});

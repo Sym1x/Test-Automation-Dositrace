@@ -6,10 +6,6 @@ class Form {
         this.reinitializeBtn = this.formWrapper.getByRole('button', { name: 'Réinitialiser' });
     };
     
-
-
-
-
     async getLabels() {
         const labelsTxt = await this.labels.allInnerTexts();
 
@@ -17,11 +13,14 @@ class Form {
     };
 
     async getFieldByLabel(labelText) {
-        const label_locator = this.labels.filter({ hasText: labelText }).first();
-        const forAttr = await label_locator.getAttribute('for');
+        let forAttr;
+        try {
+            const label_locator = this.labels.filter({ hasText: labelText }).first();
+            forAttr = await label_locator.getAttribute('for');
+        } catch(e) { throw new Error("Field " + labelText + " does not exist"); }
 
         if (!forAttr) {
-            throw new Error(`Label "${labelText}" has no corresponding field`);
+            throw new Error(`Label "${labelText}" has no corresponding field in this form`);
         }
 
         return this.formWrapper.locator(`#${forAttr}:not([class*="select2-active"]):not([disabled])`);
@@ -41,9 +40,15 @@ class Form {
         // select2 is a problem child
         else if(id?.startsWith('s2id_')) {
             const page = this.formWrapper.page();
-            await field.locator('..').click();
-
             const select2Dropdown = page.locator('#select2-drop');
+            const isSelect2Visible = await select2Dropdown.isVisible();
+            if(!isSelect2Visible){
+                const clickable = field.locator('..');
+                await clickable.hover({ position: { x: 10, y: 10 } });
+                const box = await clickable.boundingBox();
+                await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+            }
+            
             const select2Results = select2Dropdown.locator('.select2-results li');
             const options = await select2Results.allInnerTexts();
             return options;
@@ -54,7 +59,10 @@ class Form {
         const page = this.formWrapper.page();
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(500);
-        const field = await this.getFieldByLabel(labelText);
+        let field;
+        try {
+            field = await this.getFieldByLabel(labelText);
+        } catch (e) { throw new Error("Field for " + labelText + " does not exist / is not visible") };
         const tag = await field.evaluate(el => el.tagName.toLowerCase());
         const type = await field.getAttribute('type');
         const id = await field.getAttribute('id');
@@ -82,7 +90,7 @@ class Form {
             }
 
             if (type === 'date' || type === 'text' || tag === 'textarea' || type === 'number') {
-                await field.fill(value);
+                await field.fill(String(value));
             }
         }
     };

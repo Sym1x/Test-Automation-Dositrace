@@ -14,7 +14,6 @@ Then('the number of exams should match the one on the Exams page for that year',
     const info = this.page.locator('#exam_info');
     const text = await info.textContent();
     realValue = extractTotalFromText(text);
-    console.log('Real value:', realValue);
     expect(realValue).toBe(chartValue);
 });
 

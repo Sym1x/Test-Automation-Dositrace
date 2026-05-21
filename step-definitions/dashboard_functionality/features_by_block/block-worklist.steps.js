@@ -9,6 +9,8 @@ Given("the user is on the Dashboard containing the {string} block", async functi
 
     await this.DashboardPage.resetDashboard();
     await this.DashboardPage.addBlockByName(blockName);
+
+    this.block = this.DashboardPage.blocks.first();
 });
 
 
@@ -26,7 +28,6 @@ When('the user changes period', async function () {
 
 Then("the period filter does not affect the worklist block", async function () {
     await this.expect(this.block).toHaveText(this.before);
-
 });
 
 

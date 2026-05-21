@@ -19,7 +19,6 @@ Then('the user can specify a period bounding the displayed alerts', async functi
     await this.AlertsPage.addFiltersBtn.click();
     this.filtering_form = new Form(this.page.locator('#ViewAlerts'));
     const txt = await this.filtering_form.getLabels();
-    console.log(txt);
 
     const field = await this.filtering_form.getFieldByLabel('Niveau');
     await field.click;

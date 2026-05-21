@@ -35,8 +35,8 @@ async function createPatients(page) {
         await examCreationPage.addPatientBtn.click();
         await examCreationPage.add_patient_form.fillForm(patient_female_minor);
         await examCreationPage.add_patient_form.submitButton.click();
-        await examCreationPage.page.waitForLoadState('networkidle');
-    
+        await examCreationPage.page.waitForTimeout(2000);
+
         if(!(await patient_already_exists_toast.count())) {
             await examCreationPage.addPatientBtn.click();
             await examCreationPage.add_patient_form.fillForm(patient_female_adult);
@@ -84,6 +84,9 @@ async function createExams(page) {
         await examCreationPage.navigateToPage();
     }
 
+    await page.evaluate(() => {
+        document.body.style.zoom = "70%";
+    });
     try {
         await executeExamCreation(exam_today_1, patient_female_adult_info);
         await executeExamCreation(exam_today_2, patient_male_adult_info);
