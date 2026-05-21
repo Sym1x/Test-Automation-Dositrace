@@ -40,7 +40,6 @@ class DashboardPage {
 
     async addBlockByName(...blockNames) {
         await this.addBlockBtn.click();
-        await this.unaddedBlocks.first().waitFor({ state: 'visible' });
 
         const unaddedBlocks_count = await this.unaddedBlocks.count();
         if(unaddedBlocks_count === 0 || blockNames.length === 0) return;
@@ -93,7 +92,9 @@ class DashboardPage {
 
     async getUnaddedBlockNames() {
         await this.addBlockBtn.click();
-        await this.unaddedBlocks.first().waitFor({ state: 'visible' });
+        const unadded_blocks_count = await this.unaddedBlocks.count();
+        if(unadded_blocks_count === 0)
+            return [];
         
         const unaddedBlock_names = await this.unaddedBlocks.locator('a').allInnerTexts();
         return unaddedBlock_names.length === 0 ? [] : unaddedBlock_names.map(t => t.trim());
