@@ -3,8 +3,9 @@ const path = require('path');
 const fs = require('fs');
 
 const resultsJson = path.join(__dirname, '..', 'reports','test-results.json');
-const tests_sheet = path.join(__dirname, '..', 'reports','Testing Report.xlsx');
+const tests_sheet = path.join(__dirname, 'Tests unitaires Dositrace.xlsx');
 
+const output = path.join(__dirname, '..', 'reports','Testing Report.xlsx');
 
 async function updateSheet() {
     try {
@@ -40,7 +41,7 @@ async function updateSheet() {
                 
         });
         
-        await workbook.xlsx.writeFile(tests_sheet);
+        await workbook.xlsx.writeFile(output);
         console.log("Updated the spreadsheet with the latest test results successfully !");
 
     } catch(err) {
