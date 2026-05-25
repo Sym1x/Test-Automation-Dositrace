@@ -148,10 +148,10 @@ Then('the user can search through exams globally', async function () {
 
 // TestID_110: Sorting worklist by column
 Then('the user can sort the listed exams by clicking a column name', async function () {
-    await this.exam_table.clickColumn('Patient');
+    await this.exam_table.clickColumnToSort('Patient');
     await this.expect(this.exam_table.thead.locator('th', { hasText: 'Patient' })).toHaveClass(/sorting_(asc|desc)/);
 
-    await this.exam_table.clickColumn('Date');
+    await this.exam_table.clickColumnToSort('Date');
     await this.expect(this.exam_table.thead.locator('th', { hasText: 'Date' })).toHaveClass(/sorting_(asc|desc)/);
 });
 

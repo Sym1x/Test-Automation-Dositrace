@@ -2,7 +2,6 @@ Feature: Blocks can be deleted from the Dashboard
     Background:
         Given the user is on a non empty Dashboard
 
-    @testing
     @TestID_45
     Scenario: Caching block deletion 
         When the user clicks Supprimer and then the user clicks on the trash can icon on a block

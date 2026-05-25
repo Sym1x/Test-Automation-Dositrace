@@ -43,7 +43,7 @@ Then('risk patient table global search works correctly', async function () {
 });
 
 Then('the user can sort rows by clicking column headers in risk patient table', async function () {
-    await this.risk_patient_table.clickColumn('Patient');
+    await this.risk_patient_table.clickColumnToSort('Patient');
 });
 
 

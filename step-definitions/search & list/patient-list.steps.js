@@ -126,10 +126,10 @@ Then('the user can search globally along the columns of the patient table', asyn
 
 // TestID_229: Sorting patient list by column
 Then('the user can sort the patient list by clicking a column name', async function () {
-    await this.patient_table.clickColumn('Nom de famille');
+    await this.patient_table.clickColumnToSort('Nom de famille');
     await this.expect(this.patient_table.thead.locator('th', { hasText: 'Nom de famille' })).toHaveClass(/sorting_(asc|desc)/);
 
-    await this.patient_table.clickColumn('Date de naissance');
+    await this.patient_table.clickColumnToSort('Date de naissance');
     await this.expect(this.patient_table.thead.locator('th', { hasText: 'Date de naissance' })).toHaveClass(/sorting_(asc|desc)/);
 });
 

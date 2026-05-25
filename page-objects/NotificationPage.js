@@ -9,7 +9,9 @@ class NotificationPage {
         this.bell = this.page.locator('a.hasnotifications.dropdown-toggle');
         this.notifications_dropdown = this.page.locator('.dropdown-menu.notifications.arrow');
         this.filtering_form = new Form(this.page.locator('div.form-group.row.col-md-12'));
+        this.data_table = new DataTable(this.page.locator('#tablenotification_wrapper'));
         this.calendar = this.page.locator('#daterangepicker1');
+        this.calendarDays = this.page.locator('.flatpickr-calendar .dayContainer');
     }
     
     async navigateToPage() {

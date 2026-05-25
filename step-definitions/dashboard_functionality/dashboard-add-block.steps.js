@@ -13,20 +13,27 @@ Given("the user is on an empty Dashboard", async function () {
 
 // TestID_39: Listing of blocks to add to Dashboard
 When('the user clicks Ajouter', async function () {
-    await this.DashboardPage.addBlockBtn.click();
+    await this.DashboardPage.toggleAddingBlocks();
 });
 
-Then('the user can select from the list:', async function (dataTable) {
-    const toAddBlock_names = dataTable.raw().flat();
-    const list_items = this.page.locator('li[id^="linkel"]')
-    const count = await list_items.count();
+Then('the user can select from the list:', async function (expectedList) {
+    const unaddedBlocks_expected = expectedList.raw().flat();
+    const unaddedBlocks_displayed = await this.DashboardPage.getUnaddedBlockNames();
 
-    for (let i = 0; i < count; i++) {
-        const text = await list_items.nth(i).locator('a').innerText();
-        if (!toAddBlock_names.includes(text.trim())) {
-            throw new Error(`Unexpected block found: ${text}`);
+    for (const expected of unaddedBlocks_expected) {
+        try {
+            await this.expect(unaddedBlocks_displayed).toContain(expected);
+        } catch(err) {
+            throw new Error(`Missing block(s): ${expected}`);
         }
-    }
+    };
+    for (const displayed of unaddedBlocks_displayed) {
+        try {
+            await this.expect(unaddedBlocks_expected).toContain(displayed);
+        } catch(err) {
+            throw new Error(`Unexpected block(s): ${displayed}`);
+        }
+    };
 });
 
 
@@ -37,7 +44,11 @@ When('the user adds a block and clicks Valider', async function () {
 Then('the block is saved to the Dashboard', async function () {
     await this.page.reload();
     const block = this.DashboardPage.blocks.nth(0);
-    await this.expect(block).toBeVisible();
+    try {
+        await this.expect(block).toBeVisible();
+    } catch(err) {
+        throw new Error(`Block '${block}' was not saved to the Dashboard after reload`);
+    }
 });
 
 
@@ -75,14 +86,12 @@ Then('the added blocks are displayed in the respected order they were added in',
 When('the user drags an existing block by holding left click to a new position', async function () {
     await this.DashboardPage.addBlockByName('Worklist');
     const block = await this.DashboardPage.blocks.first();
-
     const coordinatesBeforeDragging = await block.boundingBox();
     await this.DashboardPage.dragBlock(block);
-    await this.page.waitForLoadState("networkidle");
     const coordinatesAfterDragging = await block.boundingBox();
     
 
-    await this.expect(coordinatesBeforeDragging.x).not.toBe(coordinatesAfterDragging.x);
+    await this.expect(coordinatesBeforeDragging.x, `Block coordinates did not change after dragging it to the right. Refer to DashboardPage.dragBlock(<blockLocator>) to modify dragging condition`).not.toBe(coordinatesAfterDragging.x);
 });
 
 Then('the user can validate the new position by clicking Sauvegarder', async function () {
@@ -93,17 +102,25 @@ Then('the user can validate the new position by clicking Sauvegarder', async fun
 
 // TestID_44
 Then('the user can hold left click on the resize arrow at the bottom left of the block and resize the block', async function () {
-    await this.DashboardPage.addBlockByName('Worklist');
+    await this.DashboardPage.addBlockByName('Rappels');
     const block = await this.DashboardPage.blocks.first();
 
     const resize_arrow = block.locator('.gs-resize-handle');
-    const resize_arrow_position = await resize_arrow.boundingBox();
-    
-    const x_position_threshold = 500 //for the arrow to be on the left, its x must be less than this value
-    const y_position_threshold = 300 //for the arrow to be on the bottom, its y must be greater than this value
-    
-    if (!(resize_arrow_position.x < x_position_threshold && resize_arrow_position.y > y_position_threshold))
+
+    const blockBox = await block.boundingBox();
+    const arrowBox = await resize_arrow.boundingBox();
+
+    if (!blockBox || !arrowBox) throw new Error("Element not visible");
+
+    const relativeX = arrowBox.x - blockBox.x;
+    const relativeY = arrowBox.y - blockBox.y;
+
+    const isLeft = relativeX < blockBox.width / 2;
+    const isBottom = relativeY > blockBox.height / 2;
+
+    if (!(isLeft || !isBottom)) {
         throw new Error("The block's resize arrow icon is not on the bottom left of the block");
+    }
 
 
     await this.DashboardPage.resizeBlock(block);

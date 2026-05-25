@@ -3,9 +3,13 @@ const { Navbar } = require("../page-objects/elements/Navbar");
 
 async function verifyPopupMessage(expectedMsg) { //must be called in cucumber world (uses this.page)
     const popup_element = this.page.locator("div[class*='ui-pnotify-container']");
-    await this.expect(popup_element).toBeVisible();
+    try {
+      await this.expect(popup_element).toBeVisible();
+    } catch (err) { throw new Error('No ui-pnotify popup is visible'); }
     const popup_txt = await this.page.locator('.ui-pnotify-text').innerText();
+    try {
     await this.expect(popup_txt).toBe(expectedMsg);
+    } catch (err) { throw new Error(`Received popup message: ${popup_txt}`); }
 }
 
 async function redirectToDositrace(page) { //because for some reason the link has to be clicked after login
@@ -36,7 +40,7 @@ function getLastMonthsRange(months) {
   return `${fmt(start)} - ${fmt(today)}`;
 }
 
-// used to get the date after a certain number of days passed as parameter (in the same format D/M/YYYY)
+// used to get the date after a certain number of days (passed as parameter)    (D/M/YYYY format)
 // outputs today's date by default
 function getDateAfter(days) {
   const today = new Date();

@@ -57,7 +57,7 @@ class Form {
 
     async fillField(labelText, value) {
         const page = this.formWrapper.page();
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('load');
         await page.waitForTimeout(500);
         let field;
         try {

@@ -6,8 +6,7 @@ When('the user clicks on a button to change month', async function () {
     await this.page.locator('#btnPreviousMonth').click();
 });
 Then('the alerts table should be updated correctly', async function () {
-
-     await this.expect(this.block).not.toHaveText(this.before);
+    await this.expect(this.block).not.toHaveText(this.before);
 });
 
 

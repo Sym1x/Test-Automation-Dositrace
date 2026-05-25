@@ -2,7 +2,7 @@ class DataTable {
     constructor(dataTableWrapper) {
         this.dataTableWrapper = dataTableWrapper;
         
-        this.dataTable_length = this.dataTableWrapper.locator('.dataTables_length');
+        this.dataTable_length = this.dataTableWrapper.locator('.dataTables_length select');
         this.search_bar = this.dataTableWrapper.locator('.dataTables_filter .form-control');
         
         this.table = this.dataTableWrapper.locator('table.dataTable');
@@ -16,13 +16,15 @@ class DataTable {
     };
 
     async changeTableLength(new_length) {
-        const lengthSelect = this.dataTable_length.locator('select');
-        await lengthSelect.selectOption(String(new_length));
+        await this.dataTable_length.selectOption(String(new_length));
         await this.waitForRefreshing();
     };
 
     async searchGlobally(keyword) {
-        await this.search_bar.type(String(keyword));
+        try {
+            await this.search_bar.type(String(keyword));
+        }
+        catch(e) { throw new Error('Could not type into the search bar') };
         await this.waitForRefreshing();
     };
 
@@ -33,8 +35,17 @@ class DataTable {
         const headers = await this.thead.locator('th').allInnerTexts();
         return headers;
     };
-    async clickColumn(columnName) {
-        await this.thead.locator('th', { hasText: columnName }).click();
+    async clickColumnToSort(columnName) {
+        const column = this.thead.locator('th', { hasText: columnName });
+        if(!(await column.isVisible()))
+            throw new Error(`Column "${columnName}" not found`);
+        
+        const columnClass = await column.getAttribute('class');
+        if (columnClass?.includes('sorting_disabled'))
+            throw new Error(`Column "${columnName}" does not allow sorting`);
+        
+        await column.click();
+        return (await column.getAttribute('aria-sort'));
     };
 
 
@@ -88,23 +99,64 @@ class DataTable {
 
     async getPaginationInfo() {
         await this.waitForRefreshing();
-        return await this.dataTable_pagination_info.innerText();
+        if(!(await this.dataTable_pagination_info.isVisible()))
+            throw new Error('Table empty; no data displayed');
+
+        const pagination_info = await this.dataTable_pagination_info.innerText();
+         if(!pagination_info)
+            throw new Error('Table empty; no data displayed');
+        return pagination_info;
     };
+
+    async inputPaginationNumber(num) {
+        await this.waitForRefreshing();
+        if(!(await this.dataTable_pagination_inputs.isVisible()))
+            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+
+        const paginate_input = this.dataTable_pagination_inputs.locator('input');
+        if(!(await paginate_input.isVisible()))
+            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        await paginate_input.fill(num);
+    }
     async goToFirstPage() {
         await this.waitForRefreshing();
-        await this.dataTable_pagination_inputs.locator('span.first').click();
+        if(!(await this.dataTable_pagination_inputs.isVisible()))
+            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+
+        const arrow_first = this.dataTable_pagination_inputs.locator('span.first');
+        if(!(await arrow_first.isVisible()))
+            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        await arrow_first.click();
     };
     async goToPreviousPage() {
         await this.waitForRefreshing();
-        await this.dataTable_pagination_inputs.locator('span.previous').click();
+        if(!(await this.dataTable_pagination_inputs.isVisible()))
+            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+
+        const arrow_previous = this.dataTable_pagination_inputs.locator('span.previous');
+        if(!(await arrow_previous.isVisible()))
+            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        await arrow_previous.click();
     };
     async goToNextPage() {
         await this.waitForRefreshing();
-        await this.dataTable_pagination_inputs.locator('span.next').click();
+        if(!(await this.dataTable_pagination_inputs.isVisible()))
+            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+
+        const arrow_next = this.dataTable_pagination_inputs.locator('span.next');
+        if(!(await arrow_next.isVisible()))
+            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        await arrow_next.click();
     };
     async goToLastPage() {
         await this.waitForRefreshing();
-        await this.dataTable_pagination_inputs.locator('span.last').click();
+        if(!(await this.dataTable_pagination_inputs.isVisible()))
+            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        
+        const arrow_last = this.dataTable_pagination_inputs.locator('span.last');
+        if(!(await arrow_last.isVisible()))
+            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        await arrow_last.click();
     };
 
 

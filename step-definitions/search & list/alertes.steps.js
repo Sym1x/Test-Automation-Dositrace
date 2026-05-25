@@ -112,7 +112,7 @@ Then('the user can change between listing 10, 25, 50 or 100 alerts per page', as
 Then('the user can sort the alerts list by clicking a column header', async function () {
     const firstHeader = (await this.alerts_table.getColumnNames())[0];
 
-    await this.alerts_table.clickColumn(firstHeader);
+    await this.alerts_table.clickColumnToSort(firstHeader);
     const rowsAfter = await this.alerts_table.getRowTexts();
 
     if (!rowsAfter.length) throw new Error('Sorting did not update table rows.');
