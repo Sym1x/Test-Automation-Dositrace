@@ -8,8 +8,7 @@
     "fulltest": "npx cucumber-js --tags \"not @skip\"",
     "codegen": "npx playwright codegen",
 
-    "excelrefactor": "node \"excel logic\"/refactorSheet.js",
-    "excelupdate": "node \"excel logic\"/updateSheet.js"
+    "excelgenerate": "node \"excel logic\"/updateSheet.js"
   },
   "keywords": [],
   "author": "",
