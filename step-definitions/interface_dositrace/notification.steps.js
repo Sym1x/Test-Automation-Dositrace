@@ -114,12 +114,12 @@ Then('the user can input key words to refine the results in notifications list',
 
 // TestID_22: Filrer button functions correctly
 When('the user chooses filtering criteria for notifications filtering and clicks Filtrer', async function() {
-    const example_criteria = { '???viewnotifications.nonvus???' : 'Oui', 'Type' : 'Tous', 'Date' : '01/01/2026 - 06/09/2026' };
+    const example_criteria = { 'Type' : 'Tous', 'Date' : '01/01/2026 - 06/09/2026' };
     await this.NotificationPage.filtering_form.fillForm(example_criteria);
     await this.NotificationPage.filtering_form.submitButton.click();
 });
 Then('the notifications list is updated in accordance with the criteria chosen', async function () {
-    if((await this.NotificationPage.getNumberOfRows()) === 0)
+    if((await this.NotificationPage.data_table.getNumberOfRows()) === 0)
         throw new Error('Not enough testing data (Notifications table yielded no results for the criteria tested)');
 
     const notification_row1 = (await this.NotificationPage.getRowTexts())[0];

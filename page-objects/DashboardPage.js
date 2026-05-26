@@ -82,8 +82,11 @@ class DashboardPage {
                 step++;
             }
         }
-    
-        await this.validateDeletionBtn.click();
+        
+        if(await this.validateDeletionBtn.isVisible()) {
+            await this.validateDeletionBtn.click();
+        }
+        await this.page.waitForLoadState('networkidle');
     }
 
     async getExistingBlockNames() {

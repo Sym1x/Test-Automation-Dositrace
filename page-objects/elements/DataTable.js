@@ -51,8 +51,8 @@ class DataTable {
 
     async getNumberOfRows() {
         await this.waitForRefreshing();
-        const numberOfRows = await this.tbody.locator('tr').count();
-        const text = await this.tbody.locator('tr').first().innerText();
+        const numberOfRows = await this.table_rows.count();
+        const text = await this.table_rows.first().innerText();
         if(numberOfRows === 1 && (text.includes('Aucune donnée') || text.includes('Aucun élément')))
             return 0;
         return numberOfRows;
@@ -103,60 +103,83 @@ class DataTable {
             throw new Error('Table empty; no data displayed');
 
         const pagination_info = await this.dataTable_pagination_info.innerText();
-         if(!pagination_info)
+        if(!pagination_info) {
             throw new Error('Table empty; no data displayed');
+        }
         return pagination_info;
     };
 
     async inputPaginationNumber(num) {
         await this.waitForRefreshing();
         if(!(await this.dataTable_pagination_inputs.isVisible()))
-            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+            throw new Error('Cannot navigate; No multiple pages are listed in the table; Table empty or lacks enough data');
 
         const paginate_input = this.dataTable_pagination_inputs.locator('input');
-        if(!(await paginate_input.isVisible()))
-            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
         await paginate_input.fill(num);
     }
     async goToFirstPage() {
         await this.waitForRefreshing();
-        if(!(await this.dataTable_pagination_inputs.isVisible()))
-            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        if(!(await this.dataTable_pagination_inputs.isVisible())) {
+            throw new Error('Cannot navigate; No multiple pages are listed in the table; Table empty or lacks enough data');
+        }
 
         const arrow_first = this.dataTable_pagination_inputs.locator('span.first');
-        if(!(await arrow_first.isVisible()))
-            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        const hasDisabledClass = (await arrow_first.getAttribute('class'))?.includes('disabled');
+        if(!(await arrow_first.isVisible()) || hasDisabledClass) {
+            console.error('Warning: Tried to navigate to the First page in the data table but we were already there');
+        }
         await arrow_first.click();
+        
+        await arrow_first.page().waitForTimeout(200);
+        await this.waitForRefreshing();
     };
     async goToPreviousPage() {
         await this.waitForRefreshing();
-        if(!(await this.dataTable_pagination_inputs.isVisible()))
-            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        if(!(await this.dataTable_pagination_inputs.isVisible())) {
+            throw new Error('Cannot navigate data table; No multiple pages are listed in the table; Table empty or lacks enough data');
+        }
 
         const arrow_previous = this.dataTable_pagination_inputs.locator('span.previous');
-        if(!(await arrow_previous.isVisible()))
-            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        const hasDisabledClass = (await arrow_previous.getAttribute('class'))?.includes('disabled');
+        if(!(await arrow_previous.isVisible()) || hasDisabledClass) {
+            console.error('Warning: Tried to navigate to the Previous page in the data table but limit was already reached');
+        }
         await arrow_previous.click();
+        
+        await arrow_previous.page().waitForTimeout(200);
+        await this.waitForRefreshing();
     };
     async goToNextPage() {
         await this.waitForRefreshing();
-        if(!(await this.dataTable_pagination_inputs.isVisible()))
-            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        if(!(await this.dataTable_pagination_inputs.isVisible())) {
+            throw new Error('Cannot navigate data table; No multiple pages are listed in the table; Table empty or lacks enough data');
+        }
 
         const arrow_next = this.dataTable_pagination_inputs.locator('span.next');
-        if(!(await arrow_next.isVisible()))
-            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        const hasDisabledClass = (await arrow_next.getAttribute('class'))?.includes('disabled');
+        if(!(await arrow_next.isVisible()) || hasDisabledClass) {
+            console.error('Warning: Tried to navigate to the Next page in the data table but limit was already reached');
+        }
         await arrow_next.click();
+
+        await arrow_next.page().waitForTimeout(200);
+        await this.waitForRefreshing();
     };
     async goToLastPage() {
         await this.waitForRefreshing();
-        if(!(await this.dataTable_pagination_inputs.isVisible()))
-            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        if(!(await this.dataTable_pagination_inputs.isVisible())) {
+            throw new Error('Cannot navigate data table; No multiple pages are listed in the table; Table empty or lacks enough data');
+        }
         
         const arrow_last = this.dataTable_pagination_inputs.locator('span.last');
-        if(!(await arrow_last.isVisible()))
-            throw new Error('No multiple pages are listed in the table; Table empty or lacks enough data');
+        const hasDisabledClass = (await arrow_last.getAttribute('class'))?.includes('disabled');
+        if(!(await arrow_last.isVisible()) || hasDisabledClass) {
+            console.error('Warning: Tried to navigate to the Last page in the data table but we were already there');
+        }
         await arrow_last.click();
+
+        await arrow_last.page().waitForTimeout(200);
+        await this.waitForRefreshing();
     };
 
 

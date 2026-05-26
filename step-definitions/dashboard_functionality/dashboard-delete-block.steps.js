@@ -47,14 +47,16 @@ Then('the message {string} is displayed after successful deletion', async functi
 // TestID_48: Absence of deleted blocks in Dashboard
 When('the user has deleted blocks from the Dashboard', async function() {
    this.blocks_to_delete = ['Worklist', 'Informations', 'Documents'];
-   await this.DashboardPage.deleteBlockByName(...this.blocks_to_delete); 
+   await this.DashboardPage.deleteBlockByName(...this.blocks_to_delete);
 });
 Then('the blocks stay absent on reload', async function() {
     await this.page.reload();
     const set_deleted_blocks = new Set(this.blocks_to_delete);
+    await this.expect(this.DashboardPage.blocks.first()).toBeVisible();
     const existing_blocks = await this.DashboardPage.getExistingBlockNames();
 
     const conflicts = existing_blocks.filter(block => set_deleted_blocks.has(block));
-    if(conflicts.length > 0)
+    if(conflicts.length > 0) {
         throw new Error("Block deletion in the dashboard did not work correctly");
+    }
 });
