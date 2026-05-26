@@ -39,7 +39,7 @@ Then('the alerts table should display at most 5 alerts', async function () {
 
 
 // TestID_74: Each alert row matches table header structure
-Then('each alert row should have the same number of columns as the table header', async function () {
+Then('each alert row should strictly follow the corresponding headers', async function (expectedHeaders) {
     await this.page.locator('#btnPreviousYear').click();
     const alerts_table = this.DashboardPage.data_table_obj;
     try {
@@ -48,18 +48,20 @@ Then('each alert row should have the same number of columns as the table header'
     catch(err) { throw new Error('Not enough alerts data (for Previous Year)'); }
 
     const columnNames = await alerts_table.getColumnNames();
-    const headerCount = columnNames.length;
-    const rows = alerts_table.table_rows;
-    const rowCount = await alerts_table.getNumberOfRows();
+    const expectedNames = expectedHeaders.raw().flat();
+    const missing_from_table = expectedNames.filter(item => !columnNames.includes(item));
+    const missing_from_expected = columnNames.filter(item => !expectedNames.includes(item));
 
-    for (let i = 0; i < rowCount; i++) {
-        const cellCount = await rows.nth(i).locator('td').count();
-        try {
-            await this.expect(cellCount).toBe(headerCount);
-        } catch(err) {
-            throw new Error(`Number of columns mismatch for row ${i}; found ${cellCount} columns`);
-        }
+    if(missing_from_table.length && missing_from_expected.length) {
+        throw new Error(`Les colonnes {${missing_from_table}} sont absentes du tableau. Les colonnes {${missing_from_expected}} ne sont pas prises en considération dans le cas de test`);
     }
+    if(missing_from_table.length) {
+        throw new Error(`Les colonnes {${missing_from_table}} sont absentes du tableau`);
+    }
+    if(missing_from_expected.length) {
+        throw new Error(`Les colonnes {${missing_from_expected}} ne sont pas prises en considération dans le cas de test`);
+    }
+
 });
 
 

@@ -13,7 +13,11 @@ Feature: Alertes block functionality
     
     @TestID_74
     Scenario: Each alert row matches table header structure
-        Then each alert row should have the same number of columns as the table header
+        Then each alert row should strictly follow the corresponding headers
+            | Date d'examen |
+            | Niveau        |
+            | Dépassement   |
+            | Patient(s)    |
 
     @TestID_75
     Scenario: Access alerts menu from dashboard alerts block
